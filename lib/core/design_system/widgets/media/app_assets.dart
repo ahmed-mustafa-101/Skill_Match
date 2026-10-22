@@ -5,6 +5,7 @@ class AppAssets {
   //icons
   static const String appIcon = '${_iconsPath}app_icon.png';
   static const String appLogo = '${_iconsPath}app_logo.png';
+  static const String googleLogo = '${_iconsPath}google_logo.png';
 
   //images
   static const String onboardingMatch = 'assets/images/onboarding_match.png';

@@ -10,6 +10,9 @@ import 'package:skillmatch/core/design_system/widgets/layout/app_card.dart';
 import 'package:skillmatch/core/design_system/widgets/layout/app_divider.dart';
 import 'package:skillmatch/core/design_system/widgets/feedback/app_snack_bar.dart';
 import 'package:skillmatch/core/design_system/widgets/inputs/app_text_field.dart';
+import 'package:skillmatch/core/design_system/widgets/media/app_assets.dart';
+import 'package:skillmatch/core/design_system/widgets/media/app_image.dart';
+import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
 import 'package:skillmatch/core/routing/app_routes.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_page_layout.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_security_banner.dart';
@@ -68,14 +71,14 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           SizedBox(height: AppSpacing.space8.h),
-          Text(
+          AppText(
             'Welcome back',
             style: AppTextStyles.sectionHeadingLarge.copyWith(
               color: AppColors.textPrimary,
             ),
           ),
           SizedBox(height: AppSpacing.space4.h),
-          Text(
+          AppText(
             'Access your verified career pathways and opportunities.',
             style: AppTextStyles.bodyMedium.copyWith(
               color: AppColors.textSecondary,
@@ -110,26 +113,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     children: [
                       SizedBox(
+                        width: 32.w,
                         height: 36.h,
-                        child: Switch(
+                        child: Checkbox(
                           value: _keepSignedIn,
-                          onChanged: (value) {
-                            setState(() => _keepSignedIn = value);
-                          },
-                          activeTrackColor: AppColors.primary,
+                          onChanged: (value) =>
+                              setState(() => _keepSignedIn = value ?? false),
+                          activeColor: AppColors.primary,
+                          side: const BorderSide(color: AppColors.border),
                         ),
                       ),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            AppText(
                               'Keep me signed in',
                               style: AppTextStyles.bodySmall.copyWith(
                                 color: AppColors.textPrimary,
                               ),
                             ),
-                            Text(
+                            AppText(
                               'Only on trusted devices',
                               style: AppTextStyles.labelSmall.copyWith(
                                 color: AppColors.textSecondary,
@@ -140,10 +144,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       AppButton(
                         text: 'Forgot password?',
-                        width: 132.w,
+                        width: 135.w,
                         variant: AppButtonVariant.text,
-                        height: 40.h,
-                        textStyle: AppTextStyles.bodyMedium,
+                        height: 45.h,
+                        textStyle: AppTextStyles.labelSmall,
                         foregroundColor: AppColors.secondary,
                         borderRadius: AppRadius.radius8.r,
                         onPressed: () =>
@@ -163,12 +167,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius: AppRadius.radius12.r,
                     height: 48.h,
                     textStyle: AppTextStyles.bodyLarge,
-                    leading: Text(
-                      'G',
-                      style: AppTextStyles.titleLarge.copyWith(
-                        color: const Color(0xFF4285F4),
-                        fontWeight: FontWeight.w700,
-                      ),
+                    leading: AppImage(
+                      assetPath: AppAssets.googleLogo,
+                      width: 20.w,
+                      height: 20.h,
+                      semanticLabel: 'Google',
                     ),
                     onPressed: () => AppSnackBar.info(
                       context,
@@ -186,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Wrap(
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                Text(
+                AppText(
                   'New here? ',
                   style: AppTextStyles.bodyMedium.copyWith(
                     color: AppColors.textPrimary,
@@ -194,7 +197,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 GestureDetector(
                   onTap: () => context.go(AppRoutes.registerScreen),
-                  child: Text(
+                  child: AppText(
                     'Create account',
                     style: AppTextStyles.bodyMedium.copyWith(
                       color: AppColors.secondary,

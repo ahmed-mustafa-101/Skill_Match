@@ -8,6 +8,7 @@ import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/buttons/app_button.dart';
 import 'package:skillmatch/core/design_system/widgets/layout/app_card.dart';
 import 'package:skillmatch/core/design_system/widgets/inputs/app_text_field.dart';
+import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
 import 'package:skillmatch/core/routing/app_routes.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_page_layout.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_validators.dart';
@@ -58,7 +59,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             color: AppColors.textSecondary,
           ),
           SizedBox(width: AppSpacing.space8.w),
-          Text(
+          AppText(
             'SkillMatch Secure Verification',
             style: AppTextStyles.labelSmall.copyWith(
               color: AppColors.textSecondary,
@@ -79,7 +80,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               borderRadius: BorderRadius.circular(4.r),
               border: Border.all(color: AppColors.border),
             ),
-            child: Text(
+            child: AppText(
               'ACCOUNT RECOVERY',
               style: AppTextStyles.labelSmall.copyWith(
                 color: AppColors.textSecondary,
@@ -87,14 +88,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             ),
           ),
           SizedBox(height: AppSpacing.space12.h),
-          Text(
+          AppText(
             'Forgot your password?',
             style: AppTextStyles.cardTitle.copyWith(
               color: AppColors.textPrimary,
             ),
           ),
           SizedBox(height: AppSpacing.space8.h),
-          Text(
+          AppText(
             'Enter your email and we’ll send you a verification code.',
             style: AppTextStyles.bodyLarge.copyWith(
               color: AppColors.textSecondary,
@@ -124,7 +125,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     height: 48.h,
                   ),
                   SizedBox(height: AppSpacing.space8.h),
-                  Text(
+                  AppText(
                     'If you don’t see the email, check Spam.',
                     textAlign: TextAlign.center,
                     style: AppTextStyles.bodySmall.copyWith(

@@ -5,6 +5,7 @@ import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/spacing/app_spacing.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/buttons/app_button.dart';
+import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
 import 'package:skillmatch/core/routing/app_routes.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_page_layout.dart';
 
@@ -25,7 +26,7 @@ class PasswordUpdatedScreen extends StatelessWidget {
             height: 48.h,
           ),
           SizedBox(height: 120.h),
-          Text(
+          AppText(
             'S K I L L M A T C H',
             style: AppTextStyles.labelLarge.copyWith(
               color: AppColors.textHint,
@@ -54,7 +55,7 @@ class PasswordUpdatedScreen extends StatelessWidget {
             ),
           ),
           SizedBox(height: AppSpacing.space24.h),
-          Text(
+          AppText(
             'Password updated',
             textAlign: TextAlign.center,
             style: AppTextStyles.sectionHeadingLarge.copyWith(
@@ -62,7 +63,7 @@ class PasswordUpdatedScreen extends StatelessWidget {
             ),
           ),
           SizedBox(height: AppSpacing.space8.h),
-          Text(
+          AppText(
             'Your password has been changed successfully. You can now log in with your new password.',
             textAlign: TextAlign.center,
             style: AppTextStyles.bodyLarge.copyWith(

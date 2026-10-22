@@ -9,6 +9,7 @@ import 'package:skillmatch/core/design_system/widgets/buttons/app_button.dart';
 import 'package:skillmatch/core/design_system/widgets/layout/app_card.dart';
 import 'package:skillmatch/core/design_system/widgets/layout/app_divider.dart';
 import 'package:skillmatch/core/design_system/widgets/inputs/app_text_field.dart';
+import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
 import 'package:skillmatch/core/routing/app_routes.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_page_layout.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_password_requirements.dart';
@@ -73,14 +74,14 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: AppSpacing.space12.h),
-          Text(
+          AppText(
             'Create a new password',
             style: AppTextStyles.sectionHeadingLarge.copyWith(
               color: AppColors.textPrimary,
             ),
           ),
           SizedBox(height: AppSpacing.space4.h),
-          Text(
+          AppText(
             'Choose a strong password you haven’t used before.',
             style: AppTextStyles.bodyLarge.copyWith(
               color: AppColors.textSecondary,
@@ -105,7 +106,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                     onChanged: (_) => setState(() {}),
                   ),
                   SizedBox(height: AppSpacing.space4.h),
-                  Text(
+                  AppText(
                     'Use at least 8 characters.',
                     style: AppTextStyles.bodySmall.copyWith(
                       color: AppColors.textSecondary,
