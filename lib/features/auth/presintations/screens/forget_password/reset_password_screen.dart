@@ -123,6 +123,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     text: 'Send code',
                     onPressed: _sendCode,
                     height: 48.h,
+                    textStyle: AppTextStyles.buttonSmall,
                   ),
                   SizedBox(height: AppSpacing.space8.h),
                   AppText(

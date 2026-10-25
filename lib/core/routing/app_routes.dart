@@ -7,4 +7,9 @@ class AppRoutes {
   static const String verifyCodeScreen = '/verify-code';
   static const String newPasswordScreen = '/new-password';
   static const String passwordUpdatedScreen = '/password-updated';
+  static const String chatBotScreen = '/chat-bot';
+  static const String roadmapScreen = '/roadmap';
+  static const String homeScreen = '/home';
+  static const String savedJobsScreen = '/saved';
+  static const String profileScreen = '/profile';
 }

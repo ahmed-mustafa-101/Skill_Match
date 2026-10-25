@@ -1,5 +1,9 @@
 import 'package:go_router/go_router.dart';
 import 'package:skillmatch/core/routing/app_routes.dart';
+import 'package:skillmatch/features/home/presentation/screens/home_shell_screen.dart';
+import 'package:skillmatch/features/home/presentation/screens/home_screen.dart';
+import 'package:skillmatch/features/home/presentation/screens/saved_jobs_screen.dart';
+import 'package:skillmatch/features/home/presentation/screens/tab_placeholder_screen.dart';
 import 'package:skillmatch/features/auth/presintations/screens/login/login_screen.dart';
 import 'package:skillmatch/features/auth/presintations/screens/forget_password/new_password_screen.dart';
 import 'package:skillmatch/features/auth/presintations/screens/forget_password/password_updated_screen.dart';
@@ -52,6 +56,55 @@ class RouterGenerationConfig {
       GoRoute(
         path: AppRoutes.passwordUpdatedScreen,
         builder: (context, state) => const PasswordUpdatedScreen(),
+      ),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) =>
+            HomeShellScreen(navigationShell: navigationShell),
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.chatBotScreen,
+                builder: (context, state) =>
+                    const TabPlaceholderScreen(title: 'Chat Bot'),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.roadmapScreen,
+                builder: (context, state) =>
+                    const TabPlaceholderScreen(title: 'Roadmap'),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.homeScreen,
+                builder: (context, state) => const HomeScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.savedJobsScreen,
+                builder: (context, state) => const SavedJobsScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.profileScreen,
+                builder: (context, state) =>
+                    const TabPlaceholderScreen(title: 'Profile'),
+              ),
+            ],
+          ),
+        ],
       ),
     ],
   );

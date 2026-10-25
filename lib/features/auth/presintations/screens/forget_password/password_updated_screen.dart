@@ -24,6 +24,7 @@ class PasswordUpdatedScreen extends StatelessWidget {
             text: 'Back to login',
             onPressed: () => context.go(AppRoutes.loginScreen),
             height: 48.h,
+            textStyle: AppTextStyles.buttonSmall,
           ),
           SizedBox(height: 120.h),
           AppText(

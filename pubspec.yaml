@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   cached_network_image: ^4.0.5
   equatable: ^3.0.0
+  flutter_bloc: ^9.1.1
   flutter_screenutil_plus: ^2.0.0
   flutter_svg: ^2.3.0
   get_it: ^9.3.0
@@ -68,10 +69,8 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/icons/app_icon.png
-    - assets/icons/app_logo.png
-    - assets/icons/google_logo.png
-    - assets/images/onboarding_match.png
+    - assets/icons/
+    - assets/images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

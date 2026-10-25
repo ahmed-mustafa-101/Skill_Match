@@ -210,6 +210,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
             onPressed: _verify,
             enabled: _isCodeComplete,
             height: 48.h,
+            textStyle: AppTextStyles.buttonSmall,
           ),
           Center(
             child: AppButton(

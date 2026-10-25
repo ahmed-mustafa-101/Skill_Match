@@ -38,11 +38,6 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _submit() {
-    if (!(_formKey.currentState?.validate() ?? false)) return;
-    AppSnackBar.info(context, message: 'Login is not connected yet.');
-  }
-
   @override
   Widget build(BuildContext context) {
     return AuthPageLayout(
@@ -144,9 +139,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       AppButton(
                         text: 'Forgot password?',
-                        width: 135.w,
+                        width: 150.w,
                         variant: AppButtonVariant.text,
-                        height: 45.h,
+                        height: 48.h,
                         textStyle: AppTextStyles.labelSmall,
                         foregroundColor: AppColors.secondary,
                         borderRadius: AppRadius.radius8.r,
@@ -156,7 +151,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   SizedBox(height: AppSpacing.space12.h),
-                  AppButton(text: 'Log in', onPressed: _submit, height: 48.h),
+                  AppButton(
+                    text: 'Log in',
+                    textStyle: AppTextStyles.buttonSmall,
+                    onPressed: () => context.go(AppRoutes.homeScreen),
+                    height: 50.h,
+                  ),
                   SizedBox(height: AppSpacing.space12.h),
                   const AppDivider(label: 'or'),
                   SizedBox(height: AppSpacing.space12.h),
@@ -166,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     foregroundColor: AppColors.textPrimary,
                     borderRadius: AppRadius.radius12.r,
                     height: 48.h,
-                    textStyle: AppTextStyles.bodyLarge,
+                    textStyle: AppTextStyles.buttonSmall,
                     leading: AppImage(
                       assetPath: AppAssets.googleLogo,
                       width: 20.w,

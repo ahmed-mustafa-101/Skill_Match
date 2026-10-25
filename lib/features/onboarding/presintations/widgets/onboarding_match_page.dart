@@ -3,8 +3,10 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/spacing/app_spacing.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
+import 'package:skillmatch/core/design_system/widgets/buttons/app_button.dart';
 import 'package:skillmatch/core/design_system/widgets/media/app_assets.dart';
-import 'package:skillmatch/features/onboarding/presintations/widgets/onboarding_shared_widgets.dart';
+import 'package:skillmatch/features/onboarding/presintations/widgets/onboarding_match_summary_card.dart';
+import 'package:skillmatch/features/onboarding/presintations/widgets/onboarding_llustration_card.dart';
 
 class OnboardingMatchPage extends StatelessWidget {
   const OnboardingMatchPage({super.key, required this.onContinue});
@@ -56,7 +58,11 @@ class OnboardingMatchPage extends StatelessWidget {
             ),
           ),
           SizedBox(height: AppSpacing.space20.h),
-          OnboardingPrimaryButton(label: 'Continue', onPressed: onContinue),
+          AppButton(
+            text: 'Continue',
+            onPressed: onContinue,
+            textStyle: AppTextStyles.buttonLarge,
+          ),
         ],
       ),
     );

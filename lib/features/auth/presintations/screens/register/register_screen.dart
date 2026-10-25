@@ -143,6 +143,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     onPressed: _submit,
                     enabled: _agreedToTerms,
                     height: 48.h,
+                    textStyle: AppTextStyles.buttonSmall,
                   ),
                   SizedBox(height: AppSpacing.space16.h),
                   const AppDivider(label: 'or'),
@@ -153,7 +154,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     foregroundColor: AppColors.textPrimary,
                     borderRadius: AppRadius.radius12.r,
                     height: 48.h,
-                    textStyle: AppTextStyles.bodyLarge,
+                    textStyle: AppTextStyles.buttonSmall,
                     leading: AppImage(
                       assetPath: AppAssets.googleLogo,
                       width: 20.w,
