@@ -11,4 +11,6 @@ class AppAssets {
 
   //images
   static const String onboardingMatch = 'assets/images/onboarding_match.png';
+  static const String onboarding2 = 'assets/images/onboarding2.png';
+
 }

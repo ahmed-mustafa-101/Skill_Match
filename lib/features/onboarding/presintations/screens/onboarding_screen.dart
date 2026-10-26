@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/spacing/app_spacing.dart';
+import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
+import 'package:skillmatch/core/design_system/widgets/buttons/app_button.dart';
 import 'package:skillmatch/features/onboarding/presintations/widgets/onboarding_header.dart';
 import 'package:skillmatch/features/onboarding/presintations/widgets/onboarding_intro_page.dart';
 import 'package:skillmatch/features/onboarding/presintations/widgets/onboarding_match_page.dart';
@@ -18,21 +20,12 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   static const _pageCount = 3;
-  final _pageController = PageController();
   int _currentPage = 0;
 
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
-
   void _goToPage(int page) {
-    _pageController.animateToPage(
-      page,
-      duration: const Duration(milliseconds: 280),
-      curve: Curves.easeOutCubic,
-    );
+    setState(() {
+      _currentPage = page;
+    });
   }
 
   void _continue() {
@@ -42,12 +35,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     }
 
     widget.onFinished?.call();
-  }
-
-  void _handlePageChanged(int page) {
-    setState(() {
-      _currentPage = page;
-    });
   }
 
   @override
@@ -63,18 +50,42 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               children: [
                 OnboardingHeader(onSkip: () => _goToPage(_pageCount - 1)),
                 Expanded(
-                  child: PageView(
-                    controller: _pageController,
-                    onPageChanged: _handlePageChanged,
-                    children: [
-                      OnboardingIntroPage(onContinue: _continue),
-                      OnboardingMatchPage(onContinue: _continue),
-                      OnboardingProfilePage(
-                        onStart: _continue,
-                        onNotNow: () => widget.onFinished?.call(),
-                      ),
-                    ],
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 220),
+                    switchInCurve: Curves.easeOut,
+                    switchOutCurve: Curves.easeIn,
+                    child: KeyedSubtree(
+                      key: ValueKey(_currentPage),
+                      child: switch (_currentPage) {
+                        0 => const OnboardingIntroPage(),
+                        1 => const OnboardingMatchPage(),
+                        _ => const OnboardingProfilePage(),
+                      },
+                    ),
                   ),
+                ),
+                SizedBox(height: AppSpacing.space20.h),
+                AppButton(
+                  text: _currentPage == _pageCount - 1 ? 'Start' : 'Continue',
+                  onPressed: _continue,
+                  textStyle: AppTextStyles.buttonLarge,
+                ),
+                SizedBox(
+                  height: 40.h,
+                  child: _currentPage == _pageCount - 1
+                      ? TextButton(
+                          onPressed: () => widget.onFinished?.call(),
+                          style: TextButton.styleFrom(
+                            foregroundColor: AppColors.secondary,
+                          ),
+                          child: Text(
+                            'Not now',
+                            style: AppTextStyles.bodyMedium.copyWith(
+                              color: AppColors.secondary,
+                            ),
+                          ),
+                        )
+                      : null,
                 ),
               ],
             ),
