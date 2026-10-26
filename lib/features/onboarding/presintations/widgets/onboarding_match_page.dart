@@ -7,6 +7,7 @@ import 'package:skillmatch/core/design_system/widgets/buttons/app_button.dart';
 import 'package:skillmatch/core/design_system/widgets/media/app_assets.dart';
 import 'package:skillmatch/features/onboarding/presintations/widgets/onboarding_match_summary_card.dart';
 import 'package:skillmatch/features/onboarding/presintations/widgets/onboarding_llustration_card.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class OnboardingMatchPage extends StatelessWidget {
   const OnboardingMatchPage({super.key, required this.onContinue});
@@ -28,20 +29,20 @@ class OnboardingMatchPage extends StatelessWidget {
                     child: Image.asset(
                       AppAssets.onboardingMatch,
                       fit: BoxFit.contain,
-                      semanticLabel: 'Illustration of an explainable job match',
+                      semanticLabel: context.l10n.matchImageSemantic,
                     ),
                   ),
                 ),
                 SizedBox(height: AppSpacing.space8.h),
-                const OnboardingMatchSummaryCard(),
+                OnboardingMatchSummaryCard(),
               ],
             ),
           ),
           SizedBox(height: AppSpacing.space24.h),
           Align(
-            alignment: Alignment.centerLeft,
+            alignment: AlignmentDirectional.centerStart,
             child: Text(
-              'Get an explainable match',
+              context.l10n.matchTitle,
               style: AppTextStyles.sectionHeading.copyWith(
                 color: AppColors.textPrimary,
               ),
@@ -49,9 +50,9 @@ class OnboardingMatchPage extends StatelessWidget {
           ),
           SizedBox(height: AppSpacing.space8.h),
           Align(
-            alignment: Alignment.centerLeft,
+            alignment: AlignmentDirectional.centerStart,
             child: Text(
-              'Not just a score — strengths, gaps, and clear next actions.',
+              context.l10n.matchDescription,
               style: AppTextStyles.bodyLarge.copyWith(
                 color: AppColors.textSecondary,
               ),
@@ -59,7 +60,7 @@ class OnboardingMatchPage extends StatelessWidget {
           ),
           SizedBox(height: AppSpacing.space20.h),
           AppButton(
-            text: 'Continue',
+            text: context.l10n.continueAction,
             onPressed: onContinue,
             textStyle: AppTextStyles.buttonLarge,
           ),

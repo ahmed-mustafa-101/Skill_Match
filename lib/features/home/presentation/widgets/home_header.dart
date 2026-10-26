@@ -6,6 +6,7 @@ import 'package:skillmatch/core/design_system/widgets/media/app_assets.dart';
 import 'package:skillmatch/core/design_system/widgets/media/app_image.dart';
 import 'package:skillmatch/features/home/presentation/utils/home_text_style.dart';
 import 'package:skillmatch/features/home/presentation/widgets/header_action.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
@@ -24,19 +25,19 @@ class HomeHeader extends StatelessWidget {
                 assetPath: AppAssets.appLogo,
                 width: 124.w,
                 height: 65.h,
-                semanticLabel: 'SkillMatch',
+                semanticLabel: context.l10n.appName,
               ),
               const Spacer(),
               HeaderAction(
                 icon: Icons.notifications_none_rounded,
-                label: 'Notifications',
+                label: context.l10n.notifications,
                 showBadge: true,
                 onPressed: () {},
               ),
               SizedBox(width: 8.w),
               HeaderAction(
                 icon: Icons.settings_outlined,
-                label: 'Settings',
+                label: context.l10n.settings,
                 onPressed: () {},
               ),
             ],
@@ -44,7 +45,7 @@ class HomeHeader extends StatelessWidget {
         ),
         SizedBox(height: 18.h),
         Text(
-          'Good morning, Ahmed',
+          context.l10n.homeGreeting('Ahmed'),
           style: AppTextStyles.sectionHeadingLarge.copyWith(
             fontSize: 23.sp,
             height: 1.2.h,
@@ -52,7 +53,7 @@ class HomeHeader extends StatelessWidget {
         ),
         SizedBox(height: 4.h),
         Text(
-          'Ready to find your next opportunity?',
+          context.l10n.homePrompt,
           style: homeTextStyle(
             AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
           ),

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/spacing/app_spacing.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class AuthPasswordRequirements extends StatelessWidget {
   const AuthPasswordRequirements({
@@ -16,22 +17,22 @@ class AuthPasswordRequirements extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+        return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Password requirements', style: AppTextStyles.labelLarge),
+        Text(context.l10n.passwordRequirements, style: AppTextStyles.labelLarge),
         SizedBox(height: AppSpacing.space8.h),
         _RequirementRow(
           isMet: password.length >= 8,
-          label: 'At least 8 characters',
+          label: context.l10n.atLeastEightCharacters,
         ),
         _RequirementRow(
           isMet: RegExp(r'\d').hasMatch(password),
-          label: 'At least one number',
+          label: context.l10n.atLeastOneNumber,
         ),
         _RequirementRow(
           isMet: password.isNotEmpty && password == confirmPassword,
-          label: 'Passwords must match',
+          label: context.l10n.passwordsMustMatch,
         ),
       ],
     );

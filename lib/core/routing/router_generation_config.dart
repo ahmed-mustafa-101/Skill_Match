@@ -12,6 +12,7 @@ import 'package:skillmatch/features/auth/presintations/screens/forget_password/r
 import 'package:skillmatch/features/auth/presintations/screens/forget_password/verify_code_screen.dart';
 import 'package:skillmatch/features/onboarding/presintations/screens/onboarding_screen.dart';
 import 'package:skillmatch/features/splash/presintations/screens/splash_screen.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class RouterGenerationConfig {
   static GoRouter goRouter = GoRouter(
@@ -66,7 +67,7 @@ class RouterGenerationConfig {
               GoRoute(
                 path: AppRoutes.chatBotScreen,
                 builder: (context, state) =>
-                    const TabPlaceholderScreen(title: 'Chat Bot'),
+                    TabPlaceholderScreen(title: context.l10n.navChatBot),
               ),
             ],
           ),
@@ -75,7 +76,7 @@ class RouterGenerationConfig {
               GoRoute(
                 path: AppRoutes.roadmapScreen,
                 builder: (context, state) =>
-                    const TabPlaceholderScreen(title: 'Roadmap'),
+                    TabPlaceholderScreen(title: context.l10n.navRoadmap),
               ),
             ],
           ),
@@ -100,7 +101,7 @@ class RouterGenerationConfig {
               GoRoute(
                 path: AppRoutes.profileScreen,
                 builder: (context, state) =>
-                    const TabPlaceholderScreen(title: 'Profile'),
+                    TabPlaceholderScreen(title: context.l10n.navProfile),
               ),
             ],
           ),

@@ -14,17 +14,14 @@ class HomeShellScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => SavedJobsCubit(),
-      child: Directionality(
-        textDirection: TextDirection.ltr,
-        child: Scaffold(
-          backgroundColor: AppColors.background,
-          body: navigationShell,
-          bottomNavigationBar: HomeBottomNavigationBar(
-            currentIndex: navigationShell.currentIndex,
-            onSelected: (index) => navigationShell.goBranch(
-              index,
-              initialLocation: index == navigationShell.currentIndex,
-            ),
+      child: Scaffold(
+        backgroundColor: AppColors.background,
+        body: navigationShell,
+        bottomNavigationBar: HomeBottomNavigationBar(
+          currentIndex: navigationShell.currentIndex,
+          onSelected: (index) => navigationShell.goBranch(
+            index,
+            initialLocation: index == navigationShell.currentIndex,
           ),
         ),
       ),

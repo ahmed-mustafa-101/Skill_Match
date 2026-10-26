@@ -4,6 +4,7 @@ import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/features/home/presentation/utils/home_job_filter.dart';
 import 'package:skillmatch/features/home/presentation/utils/home_text_style.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class JobFilterSheet extends StatelessWidget {
   const JobFilterSheet({super.key, required this.selectedFilter});
@@ -24,7 +25,7 @@ class JobFilterSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+        return SafeArea(
       child: Padding(
         padding: EdgeInsets.fromLTRB(20.w, 4.h, 20.w, 24.h),
         child: Column(
@@ -32,7 +33,7 @@ class JobFilterSheet extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Filter jobs',
+              context.l10n.filterTitle,
               style: homeTextStyle(AppTextStyles.sectionHeading),
             ),
             SizedBox(height: 12.h),
@@ -41,8 +42,14 @@ class JobFilterSheet extends StatelessWidget {
               runSpacing: 8.h,
               children: HomeJobFilter.filters.map((filter) {
                 final selected = filter == selectedFilter;
+                final localizedFilter = switch (filter) {
+                  'Full-time' => context.l10n.filterFullTime,
+                  'Internship' => context.l10n.filterInternship,
+                  'Remote' => context.l10n.filterRemote,
+                  _ => context.l10n.filterAllJobs,
+                };
                 return ChoiceChip(
-                  label: Text(filter),
+                  label: Text(localizedFilter),
                   selected: selected,
                   onSelected: (_) => Navigator.pop(context, filter),
                   selectedColor: AppColors.primaryFixed,

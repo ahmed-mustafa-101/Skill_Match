@@ -7,6 +7,7 @@ import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/buttons/app_icon_button.dart';
 import 'package:skillmatch/core/design_system/widgets/media/app_assets.dart';
 import 'package:skillmatch/core/design_system/widgets/media/app_image.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class AuthPageLayout extends StatelessWidget {
   const AuthPageLayout({
@@ -26,49 +27,48 @@ class AuthPageLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.ltr,
-      child: Scaffold(
-        backgroundColor: AppColors.background,
-        appBar: showTopBar
-            ? AppAppBar(
-                title: Text(title, style: AppTextStyles.titleLarge),
-                leading: AppIconButton(
-                  icon: Icons.arrow_back_rounded,
-                  onPressed: onBack,
-                  variant: AppIconButtonVariant.ghost,
-                  size: 40.w,
-                  tooltip: 'Back',
-                ),
-                centerTitle: true,
-              )
-            : null,
-        body: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: EdgeInsets.fromLTRB(
-                    AppSpacing.space16.w,
-                    AppSpacing.space8.h,
-                    AppSpacing.space16.w,
-                    AppSpacing.space24.h,
-                  ),
-                  child: child,
-                ),
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      appBar: showTopBar
+          ? AppAppBar(
+              title: Text(title, style: AppTextStyles.titleLarge),
+              leading: AppIconButton(
+                icon: Directionality.of(context) == TextDirection.rtl
+                    ? Icons.arrow_forward_rounded
+                    : Icons.arrow_back_rounded,
+                onPressed: onBack,
+                variant: AppIconButtonVariant.ghost,
+                size: 40.w,
+                tooltip: context.l10n.back,
               ),
-              if (bottom != null)
-                Padding(
-                  padding: EdgeInsets.fromLTRB(
-                    AppSpacing.space16.w,
-                    AppSpacing.space8.h,
-                    AppSpacing.space16.w,
-                    AppSpacing.space16.h,
-                  ),
-                  child: bottom,
+              centerTitle: true,
+            )
+          : null,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.fromLTRB(
+                  AppSpacing.space16.w,
+                  AppSpacing.space8.h,
+                  AppSpacing.space16.w,
+                  AppSpacing.space24.h,
                 ),
-            ],
-          ),
+                child: child,
+              ),
+            ),
+            if (bottom != null)
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                  AppSpacing.space16.w,
+                  AppSpacing.space8.h,
+                  AppSpacing.space16.w,
+                  AppSpacing.space16.h,
+                ),
+                child: bottom,
+              ),
+          ],
         ),
       ),
     );
@@ -97,7 +97,7 @@ class AuthBrandMark extends StatelessWidget {
           child: AppImage(
             assetPath: AppAssets.appIcon,
             fit: BoxFit.contain,
-            semanticLabel: 'SkillMatch app icon',
+            semanticLabel: context.l10n.appIconSemantic,
           ),
         ),
         SizedBox(height: AppSpacing.space8.h),
@@ -105,7 +105,7 @@ class AuthBrandMark extends StatelessWidget {
           assetPath: AppAssets.appLogo,
           width: 108.w,
           fit: BoxFit.contain,
-          semanticLabel: 'SkillMatch',
+          semanticLabel: context.l10n.appName,
         ),
         if (tagline != null) ...[
           SizedBox(height: AppSpacing.space4.h),

@@ -13,6 +13,8 @@ import 'package:skillmatch/features/home/presentation/widgets/home_search_bar.da
 import 'package:skillmatch/features/home/presentation/widgets/job_listing_card.dart';
 import 'package:skillmatch/features/home/presentation/widgets/job_filter_sheet.dart';
 import 'package:skillmatch/features/home/presentation/widgets/job_match_banner.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
+import 'package:skillmatch/features/home/presentation/utils/home_job_localization.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -128,7 +130,11 @@ class _HomeScreenState extends State<HomeScreen> {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
-        SnackBar(content: Text('Application for ${job.title} is coming soon.')),
+        SnackBar(
+          content: Text(
+            context.l10n.applicationComingSoon(job.localizedTitle(context.l10n)),
+          ),
+        ),
       );
   }
 }

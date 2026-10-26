@@ -52,32 +52,29 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.ltr,
-      child: Scaffold(
-        backgroundColor: AppColors.background,
-        body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppSpacing.space16.w),
-            child: Column(
-              children: [
-                OnboardingHeader(onSkip: () => _goToPage(_pageCount - 1)),
-                Expanded(
-                  child: PageView(
-                    controller: _pageController,
-                    onPageChanged: _handlePageChanged,
-                    children: [
-                      OnboardingIntroPage(onContinue: _continue),
-                      OnboardingMatchPage(onContinue: _continue),
-                      OnboardingProfilePage(
-                        onStart: _continue,
-                        onNotNow: () => widget.onFinished?.call(),
-                      ),
-                    ],
-                  ),
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppSpacing.space16.w),
+          child: Column(
+            children: [
+              OnboardingHeader(onSkip: () => _goToPage(_pageCount - 1)),
+              Expanded(
+                child: PageView(
+                  controller: _pageController,
+                  onPageChanged: _handlePageChanged,
+                  children: [
+                    OnboardingIntroPage(onContinue: _continue),
+                    OnboardingMatchPage(onContinue: _continue),
+                    OnboardingProfilePage(
+                      onStart: _continue,
+                      onNotNow: () => widget.onFinished?.call(),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

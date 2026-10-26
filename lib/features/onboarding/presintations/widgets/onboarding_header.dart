@@ -3,6 +3,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/spacing/app_spacing.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class OnboardingHeader extends StatelessWidget {
   const OnboardingHeader({super.key, required this.onSkip});
@@ -17,14 +18,14 @@ class OnboardingHeader extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Text(
-            'SkillMatch',
+            context.l10n.appName,
             style: AppTextStyles.titleLarge.copyWith(
               color: AppColors.primary,
               fontWeight: FontWeight.w700,
             ),
           ),
           Align(
-            alignment: Alignment.centerRight,
+            alignment: AlignmentDirectional.centerEnd,
             child: TextButton(
               onPressed: onSkip,
               style: TextButton.styleFrom(
@@ -33,7 +34,7 @@ class OnboardingHeader extends StatelessWidget {
                 minimumSize: Size(48.w, 40.h),
               ),
               child: Text(
-                'Skip',
+                context.l10n.skip,
                 style: AppTextStyles.bodyMedium.copyWith(
                   color: AppColors.secondary,
                 ),

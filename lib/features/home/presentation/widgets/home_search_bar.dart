@@ -3,6 +3,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/features/home/presentation/utils/home_text_style.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class HomeSearchBar extends StatelessWidget {
   const HomeSearchBar({
@@ -18,7 +19,7 @@ class HomeSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+        return Container(
       height: 48.h,
       decoration: BoxDecoration(
         color: AppColors.surface,
@@ -47,8 +48,8 @@ class HomeSearchBar extends StatelessWidget {
               onChanged: onChanged,
               textInputAction: TextInputAction.search,
               style: homeTextStyle(AppTextStyles.bodySmall),
-              decoration: const InputDecoration(
-                hintText: 'Search jobs, companies, or skills',
+              decoration: InputDecoration(
+                hintText: context.l10n.searchHint,
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
@@ -60,7 +61,7 @@ class HomeSearchBar extends StatelessWidget {
           ),
           IconButton(
             onPressed: onFilter,
-            tooltip: 'Filter jobs',
+            tooltip: context.l10n.filterJobs,
             icon: Icon(
               Icons.filter_list_rounded,
               size: 20.r,

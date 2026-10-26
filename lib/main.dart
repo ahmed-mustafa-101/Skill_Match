@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:skillmatch/core/routing/router_generation_config.dart';
 import 'package:skillmatch/core/design_system/theme/app_theme.dart';
+import 'package:skillmatch/generated/l10n.dart';
 
 void main() {
   runApp(const SkillMatchApp());
@@ -22,9 +23,9 @@ class SkillMatchApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routerConfig: RouterGenerationConfig.goRouter,
         theme: AppTheme.light,
-        locale: const Locale('ar'),
-        supportedLocales: const [Locale('ar')],
+        supportedLocales: S.delegate.supportedLocales,
         localizationsDelegates: const [
+          S.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,

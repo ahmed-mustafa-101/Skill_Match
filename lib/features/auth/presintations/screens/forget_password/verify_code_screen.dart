@@ -13,6 +13,7 @@ import 'package:skillmatch/core/design_system/widgets/layout/app_card.dart';
 import 'package:skillmatch/core/design_system/widgets/feedback/app_snack_bar.dart';
 import 'package:skillmatch/core/routing/app_routes.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_page_layout.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class VerifyCodeScreen extends StatefulWidget {
   const VerifyCodeScreen({
@@ -91,7 +92,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
       context.go(AppRoutes.loginScreen);
       AppSnackBar.info(
         context,
-        message: 'Account creation is not connected yet.',
+        message: context.l10n.accountCreationUnavailable,
       );
       return;
     }
@@ -108,7 +109,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
     final maskedEmail = _maskedEmail(widget.email);
 
     return AuthPageLayout(
-      title: 'Verify code',
+      title: context.l10n.verifyCodeTitle,
       onBack: () => context.go(AppRoutes.resetPasswordScreen),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,7 +118,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
           const Center(child: AuthBrandMark()),
           SizedBox(height: AppSpacing.space24.h),
           Text(
-            'Enter verification code',
+            context.l10n.enterVerificationCode,
             style: AppTextStyles.sectionHeadingLarge.copyWith(
               color: AppColors.textPrimary,
             ),
@@ -125,8 +126,8 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
           SizedBox(height: AppSpacing.space4.h),
           Text(
             maskedEmail.isEmpty
-                ? 'We sent a 6-digit code to your email.'
-                : 'We sent a 6-digit code to $maskedEmail.',
+                ? context.l10n.verificationSentGeneric
+                : context.l10n.verificationSentToEmail(maskedEmail),
             style: AppTextStyles.bodyLarge.copyWith(
               color: AppColors.textSecondary,
             ),
@@ -141,7 +142,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'VERIFICATION CODE',
+                  context.l10n.verificationCodeLabel,
                   style: AppTextStyles.labelSmall.copyWith(
                     color: AppColors.textPrimary,
                     fontWeight: FontWeight.w600,
@@ -173,8 +174,10 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                     Expanded(
                       child: Text(
                         _resendSeconds == 0
-                            ? 'You can request a new code'
-                            : 'Resend available in 00:${_resendSeconds.toString().padLeft(2, '0')}',
+                            ? context.l10n.requestNewCode
+                            : context.l10n.resendAvailableIn(
+                                _resendSeconds.toString().padLeft(2, '0'),
+                              ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: AppTextStyles.bodySmall.copyWith(
@@ -190,7 +193,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
                       child: Text(
-                        'Resend code',
+                        context.l10n.resendCode,
                         maxLines: 1,
                         style: AppTextStyles.bodySmall.copyWith(
                           color: _resendSeconds == 0
@@ -206,7 +209,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
           ),
           SizedBox(height: AppSpacing.space20.h),
           AppButton(
-            text: 'Verify',
+            text: context.l10n.verify,
             onPressed: _verify,
             enabled: _isCodeComplete,
             height: 48.h,
@@ -214,7 +217,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
           ),
           Center(
             child: AppButton(
-              text: 'Change email',
+              text: context.l10n.changeEmail,
               variant: AppButtonVariant.text,
               height: 40.h,
               textStyle: AppTextStyles.bodyMedium,
@@ -226,7 +229,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
           SizedBox(height: AppSpacing.space8.h),
           Center(
             child: Text(
-              'Didn’t receive it? Check Spam.',
+              context.l10n.didNotReceiveCheckSpam,
               style: AppTextStyles.bodySmall.copyWith(
                 color: AppColors.textSecondary,
               ),

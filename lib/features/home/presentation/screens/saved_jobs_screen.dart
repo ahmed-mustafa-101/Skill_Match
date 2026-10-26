@@ -8,6 +8,8 @@ import 'package:skillmatch/features/home/data/job_sample_data.dart';
 import 'package:skillmatch/features/home/presentation/state/saved_jobs_cubit.dart';
 import 'package:skillmatch/features/home/presentation/utils/home_text_style.dart';
 import 'package:skillmatch/features/home/presentation/widgets/job_listing_card.dart';
+import 'package:skillmatch/features/home/presentation/utils/home_job_localization.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class SavedJobsScreen extends StatelessWidget {
   const SavedJobsScreen({super.key});
@@ -37,7 +39,7 @@ class SavedJobsScreen extends StatelessWidget {
                 sliver: SliverList(
                   delegate: SliverChildListDelegate([
                     Text(
-                      'Saved jobs',
+                      context.l10n.savedJobs,
                       style: homeTextStyle(AppTextStyles.sectionHeading),
                     ),
                     SizedBox(height: AppSpacing.space16.h),
@@ -53,7 +55,7 @@ class SavedJobsScreen extends StatelessWidget {
                             ),
                             SizedBox(height: 12.h),
                             Text(
-                              'No saved jobs yet',
+                              context.l10n.noSavedJobs,
                               style: homeTextStyle(
                                 AppTextStyles.titleMedium.copyWith(
                                   color: AppColors.textSecondary,
@@ -62,7 +64,7 @@ class SavedJobsScreen extends StatelessWidget {
                             ),
                             SizedBox(height: 4.h),
                             Text(
-                              'Tap the bookmark on a job to save it here.',
+                              context.l10n.saveJobHint,
                               textAlign: TextAlign.center,
                               style: homeTextStyle(
                                 AppTextStyles.bodySmall.copyWith(
@@ -88,7 +90,9 @@ class SavedJobsScreen extends StatelessWidget {
                               ..showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'Application for ${job.title} is coming soon.',
+                                    context.l10n.applicationComingSoon(
+                                      job.localizedTitle(context.l10n),
+                                    ),
                                   ),
                                 ),
                               ),

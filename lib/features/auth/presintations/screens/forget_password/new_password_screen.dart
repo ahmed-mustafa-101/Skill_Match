@@ -14,6 +14,7 @@ import 'package:skillmatch/core/routing/app_routes.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_page_layout.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_password_requirements.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_validators.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class NewPasswordScreen extends StatefulWidget {
   const NewPasswordScreen({super.key, this.email = ''});
@@ -43,25 +44,25 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final verifyRoute = Uri(
+        final verifyRoute = Uri(
       path: AppRoutes.verifyCodeScreen,
       queryParameters: {'email': widget.email, 'flow': 'reset'},
     ).toString();
     return AuthPageLayout(
-      title: 'New password',
+      title: context.l10n.newPasswordTitle,
       onBack: () => context.go(verifyRoute),
       bottom: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           AppButton(
-            text: 'Update password',
+            text: context.l10n.updatePassword,
             onPressed: _updatePassword,
             height: 48.h,
             textStyle: AppTextStyles.buttonSmall,
           ),
           SizedBox(height: AppSpacing.space8.h),
           AppButton(
-            text: 'Back to login',
+            text: context.l10n.backToLogin,
             variant: AppButtonVariant.text,
             height: 50.h,
             textStyle: AppTextStyles.buttonSmall,
@@ -76,14 +77,14 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
         children: [
           SizedBox(height: AppSpacing.space12.h),
           AppText(
-            'Create a new password',
+            context.l10n.createNewPassword,
             style: AppTextStyles.sectionHeadingLarge.copyWith(
               color: AppColors.textPrimary,
             ),
           ),
           SizedBox(height: AppSpacing.space4.h),
           AppText(
-            'Choose a strong password you haven’t used before.',
+            context.l10n.chooseStrongPassword,
             style: AppTextStyles.bodyLarge.copyWith(
               color: AppColors.textSecondary,
             ),
@@ -100,15 +101,15 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppTextField(
-                    label: 'New password',
+                    label: context.l10n.newPassword,
                     controller: _passwordController,
                     type: AppTextFieldType.password,
-                    validator: AuthValidators.password(),
+                    validator: AuthValidators.password(context.l10n),
                     onChanged: (_) => setState(() {}),
                   ),
                   SizedBox(height: AppSpacing.space4.h),
                   AppText(
-                    'Use at least 8 characters.',
+                    context.l10n.useAtLeastEightCharacters,
                     style: AppTextStyles.bodySmall.copyWith(
                       color: AppColors.textSecondary,
                     ),
@@ -120,11 +121,12 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                     child: const AppDivider(),
                   ),
                   AppTextField(
-                    label: 'Confirm new password',
+                    label: context.l10n.confirmNewPassword,
                     controller: _confirmPasswordController,
                     type: AppTextFieldType.password,
                     validator: AuthValidators.confirmPassword(
                       _passwordController,
+                      context.l10n,
                     ),
                     onChanged: (_) => setState(() {}),
                   ),

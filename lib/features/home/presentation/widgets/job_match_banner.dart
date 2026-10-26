@@ -4,13 +4,14 @@ import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/spacing/app_radius.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/features/home/presentation/utils/home_text_style.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class JobMatchBanner extends StatelessWidget {
   const JobMatchBanner({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+        return Container(
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppRadius.radius16.r),
@@ -59,7 +60,7 @@ class JobMatchBanner extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20.r),
                       ),
                       child: Text(
-                        '12 matches',
+                        context.l10n.matchesCount,
                         style: homeTextStyle(
                           AppTextStyles.labelSmall.copyWith(
                             color: AppColors.success,
@@ -74,7 +75,7 @@ class JobMatchBanner extends StatelessWidget {
                 ),
                 SizedBox(height: 10.h),
                 Text(
-                  'We found jobs that match your profile',
+                  context.l10n.matchesBannerTitle,
                   style: homeTextStyle(
                     AppTextStyles.titleSmall.copyWith(
                       fontWeight: FontWeight.w700,
@@ -83,7 +84,7 @@ class JobMatchBanner extends StatelessWidget {
                 ),
                 SizedBox(height: 3.h),
                 Text(
-                  'Explore opportunities based on your skills and career preferences.',
+                  context.l10n.matchesBannerDescription,
                   style: homeTextStyle(
                     AppTextStyles.bodySmall.copyWith(
                       color: AppColors.textSecondary,
@@ -105,14 +106,12 @@ class JobMatchBanner extends StatelessWidget {
                     onPressed: () => ScaffoldMessenger.of(context)
                       ..hideCurrentSnackBar()
                       ..showSnackBar(
-                        const SnackBar(
-                          content: Text('Your 12 job matches are ready.'),
-                        ),
+                        SnackBar(content: Text(context.l10n.matchesReady)),
                       ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('View Matches'),
+                        Text(context.l10n.viewMatches),
                         SizedBox(width: 6.w),
                         Icon(Icons.arrow_forward_rounded, size: 16.r),
                       ],

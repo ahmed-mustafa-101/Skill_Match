@@ -3,6 +3,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/features/home/presentation/utils/home_text_style.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class HomeEmptySearchState extends StatelessWidget {
   const HomeEmptySearchState({super.key});
@@ -20,7 +21,7 @@ class HomeEmptySearchState extends StatelessWidget {
           ),
           SizedBox(height: 8.h),
           Text(
-            'No jobs match your search',
+            context.l10n.noJobsMatch,
             style: homeTextStyle(
               AppTextStyles.titleSmall.copyWith(color: AppColors.textSecondary),
             ),

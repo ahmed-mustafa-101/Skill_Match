@@ -8,6 +8,7 @@ import 'package:skillmatch/core/design_system/widgets/buttons/app_button.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
 import 'package:skillmatch/core/routing/app_routes.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_page_layout.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class PasswordUpdatedScreen extends StatelessWidget {
   const PasswordUpdatedScreen({super.key});
@@ -21,7 +22,7 @@ class PasswordUpdatedScreen extends StatelessWidget {
       bottom: Column(
         children: [
           AppButton(
-            text: 'Back to login',
+            text: context.l10n.backToLogin,
             onPressed: () => context.go(AppRoutes.loginScreen),
             height: 48.h,
             textStyle: AppTextStyles.buttonSmall,
@@ -57,7 +58,7 @@ class PasswordUpdatedScreen extends StatelessWidget {
           ),
           SizedBox(height: AppSpacing.space24.h),
           AppText(
-            'Password updated',
+            context.l10n.passwordUpdated,
             textAlign: TextAlign.center,
             style: AppTextStyles.sectionHeadingLarge.copyWith(
               color: AppColors.textPrimary,
@@ -65,7 +66,7 @@ class PasswordUpdatedScreen extends StatelessWidget {
           ),
           SizedBox(height: AppSpacing.space8.h),
           AppText(
-            'Your password has been changed successfully. You can now log in with your new password.',
+            context.l10n.passwordUpdatedDescription,
             textAlign: TextAlign.center,
             style: AppTextStyles.bodyLarge.copyWith(
               color: AppColors.textSecondary,

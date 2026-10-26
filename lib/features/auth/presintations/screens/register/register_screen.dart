@@ -16,6 +16,7 @@ import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
 import 'package:skillmatch/core/routing/app_routes.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_page_layout.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_validators.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -52,12 +53,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AuthPageLayout(
-      title: 'Create account',
+        return AuthPageLayout(
+      title: context.l10n.registerTitle,
       onBack: () => context.go(AppRoutes.loginScreen),
       child: Column(
         children: [
-          const AuthBrandMark(tagline: 'Smart Career Discovery'),
+          AuthBrandMark(tagline: context.l10n.skillMatchTagline),
           SizedBox(height: AppSpacing.space16.h),
           AppCard(
             padding: EdgeInsets.all(AppSpacing.space16.w),
@@ -69,35 +70,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 children: [
                   AppTextField(
-                    label: 'Email',
+                    label: context.l10n.email,
                     controller: _emailController,
                     type: AppTextFieldType.email,
-                    validator: AuthValidators.email,
+                    validator: AuthValidators.email(context.l10n),
                   ),
                   SizedBox(height: AppSpacing.space12.h),
                   AppTextField(
-                    label: 'Phone number',
+                    label: context.l10n.phoneNumber,
                     controller: _phoneController,
                     type: AppTextFieldType.phone,
-                    validator: AuthValidators.required,
+                    validator: AuthValidators.required(context.l10n),
                   ),
                   SizedBox(height: AppSpacing.space12.h),
                   AppTextField(
-                    label: 'Password',
+                    label: context.l10n.password,
                     controller: _passwordController,
                     type: AppTextFieldType.password,
-                    validator: AuthValidators.password(),
+                    validator: AuthValidators.password(context.l10n),
                     onChanged: (_) => setState(() {}),
                   ),
                   Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: AlignmentDirectional.centerStart,
                     child: Padding(
                       padding: EdgeInsets.only(
                         top: AppSpacing.space4.h,
                         bottom: AppSpacing.space8.h,
                       ),
                       child: AppText(
-                        'Use 8+ characters',
+                        context.l10n.useEightCharacters,
                         style: AppTextStyles.bodySmall.copyWith(
                           color: AppColors.textSecondary,
                         ),
@@ -105,11 +106,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   AppTextField(
-                    label: 'Confirm password',
+                    label: context.l10n.confirmPassword,
                     controller: _confirmPasswordController,
                     type: AppTextFieldType.password,
                     validator: AuthValidators.confirmPassword(
                       _passwordController,
+                      context.l10n,
                     ),
                   ),
                   SizedBox(height: AppSpacing.space12.h),
@@ -129,7 +131,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       SizedBox(width: AppSpacing.space8.w),
                       Expanded(
                         child: Text(
-                          'I agree to the Terms & Privacy Policy',
+                          context.l10n.agreeToTerms,
                           style: AppTextStyles.bodySmall.copyWith(
                             color: AppColors.textPrimary,
                           ),
@@ -139,17 +141,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   SizedBox(height: AppSpacing.space12.h),
                   AppButton(
-                    text: 'Complete sign up',
+                    text: context.l10n.completeSignUp,
                     onPressed: _submit,
                     enabled: _agreedToTerms,
                     height: 48.h,
                     textStyle: AppTextStyles.buttonSmall,
                   ),
                   SizedBox(height: AppSpacing.space16.h),
-                  const AppDivider(label: 'or'),
+                  AppDivider(label: context.l10n.or),
                   SizedBox(height: AppSpacing.space16.h),
                   AppButton(
-                    text: 'Sign up with Google',
+                    text: context.l10n.signUpWithGoogle,
                     variant: AppButtonVariant.outlined,
                     foregroundColor: AppColors.textPrimary,
                     borderRadius: AppRadius.radius12.r,
@@ -159,11 +161,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       assetPath: AppAssets.googleLogo,
                       width: 20.w,
                       height: 20.h,
-                      semanticLabel: 'Google',
+                      semanticLabel: context.l10n.google,
                     ),
                     onPressed: () => AppSnackBar.info(
                       context,
-                      message: 'Google sign-up is not connected yet.',
+                      message: context.l10n.googleSignUpUnavailable,
                     ),
                   ),
                 ],
@@ -175,7 +177,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               AppText(
-                'Already have an account? ',
+                context.l10n.alreadyHaveAccount,
                 style: AppTextStyles.bodyMedium.copyWith(
                   color: AppColors.secondary,
                 ),
@@ -183,7 +185,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               GestureDetector(
                 onTap: () => context.go(AppRoutes.loginScreen),
                 child: Text(
-                  'Log in',
+                  context.l10n.loginTitle,
                   style: AppTextStyles.bodyMedium.copyWith(
                     color: AppColors.secondary,
                     fontWeight: FontWeight.w600,
@@ -194,7 +196,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           SizedBox(height: AppSpacing.space8.h),
           AppText(
-            'Next, you can upload your CV (optional).',
+            context.l10n.nextUploadCv,
             style: AppTextStyles.bodySmall.copyWith(
               color: AppColors.textSecondary,
             ),

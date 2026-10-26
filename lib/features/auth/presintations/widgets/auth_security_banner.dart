@@ -5,6 +5,7 @@ import 'package:skillmatch/core/design_system/spacing/app_radius.dart';
 import 'package:skillmatch/core/design_system/spacing/app_spacing.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/layout/app_card.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class AuthSecurityBanner extends StatelessWidget {
   const AuthSecurityBanner({super.key});
@@ -28,7 +29,7 @@ class AuthSecurityBanner extends StatelessWidget {
           SizedBox(width: AppSpacing.space12.w),
           Expanded(
             child: Text(
-              'SkillMatch securely protects your verified credentials and application histories.',
+              context.l10n.securityBanner,
               style: AppTextStyles.bodySmall.copyWith(
                 color: AppColors.textSecondary,
               ),

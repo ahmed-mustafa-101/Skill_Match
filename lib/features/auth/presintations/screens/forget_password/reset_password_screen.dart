@@ -12,6 +12,7 @@ import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
 import 'package:skillmatch/core/routing/app_routes.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_page_layout.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_validators.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key, this.email = ''});
@@ -47,8 +48,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AuthPageLayout(
-      title: 'Reset password',
+        return AuthPageLayout(
+      title: context.l10n.resetPasswordTitle,
       onBack: () => context.go(AppRoutes.loginScreen),
       bottom: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +61,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           ),
           SizedBox(width: AppSpacing.space8.w),
           AppText(
-            'SkillMatch Secure Verification',
+            context.l10n.secureVerification,
             style: AppTextStyles.labelSmall.copyWith(
               color: AppColors.textSecondary,
             ),
@@ -81,7 +82,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               border: Border.all(color: AppColors.border),
             ),
             child: AppText(
-              'ACCOUNT RECOVERY',
+              context.l10n.accountRecovery,
               style: AppTextStyles.labelSmall.copyWith(
                 color: AppColors.textSecondary,
               ),
@@ -89,14 +90,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           ),
           SizedBox(height: AppSpacing.space12.h),
           AppText(
-            'Forgot your password?',
+            context.l10n.forgotYourPassword,
             style: AppTextStyles.cardTitle.copyWith(
               color: AppColors.textPrimary,
             ),
           ),
           SizedBox(height: AppSpacing.space8.h),
           AppText(
-            'Enter your email and we’ll send you a verification code.',
+            context.l10n.resetPasswordDescription,
             style: AppTextStyles.bodyLarge.copyWith(
               color: AppColors.textSecondary,
             ),
@@ -112,22 +113,22 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               child: Column(
                 children: [
                   AppTextField(
-                    label: 'Email address',
+                    label: context.l10n.emailAddress,
                     controller: _emailController,
                     type: AppTextFieldType.email,
-                    hintText: 'name@example.com',
-                    validator: AuthValidators.email,
+                    hintText: context.l10n.emailExample,
+                    validator: AuthValidators.email(context.l10n),
                   ),
                   SizedBox(height: AppSpacing.space16.h),
                   AppButton(
-                    text: 'Send code',
+                    text: context.l10n.sendCode,
                     onPressed: _sendCode,
                     height: 48.h,
                     textStyle: AppTextStyles.buttonSmall,
                   ),
                   SizedBox(height: AppSpacing.space8.h),
                   AppText(
-                    'If you don’t see the email, check Spam.',
+                    context.l10n.checkSpam,
                     textAlign: TextAlign.center,
                     style: AppTextStyles.bodySmall.copyWith(
                       color: AppColors.textSecondary,
@@ -140,7 +141,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           SizedBox(height: AppSpacing.space16.h),
           Center(
             child: AppButton(
-              text: 'Back to login',
+              text: context.l10n.backToLogin,
               variant: AppButtonVariant.text,
               height: 40.h,
               textStyle: AppTextStyles.bodyMedium,

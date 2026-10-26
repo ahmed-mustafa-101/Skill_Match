@@ -5,6 +5,8 @@ import 'package:skillmatch/core/design_system/spacing/app_radius.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/features/home/domain/entities/job_listing.dart';
 import 'package:skillmatch/features/home/presentation/utils/home_text_style.dart';
+import 'package:skillmatch/features/home/presentation/utils/home_job_localization.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class JobListingCard extends StatelessWidget {
   const JobListingCard({
@@ -22,7 +24,7 @@ class JobListingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isStrongMatch = job.matchStrength >= 85;
+        final isStrongMatch = job.matchStrength >= 85;
     final matchColor = isStrongMatch ? AppColors.success : AppColors.warning;
     final matchBackground = isStrongMatch
         ? AppColors.successContainer
@@ -74,7 +76,7 @@ class JobListingCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      job.title,
+                      job.localizedTitle(context.l10n),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: homeTextStyle(
@@ -97,7 +99,7 @@ class JobListingCard extends StatelessWidget {
               ),
               IconButton(
                 onPressed: onSave,
-                tooltip: isSaved ? 'Remove saved job' : 'Save job',
+                tooltip: isSaved ? context.l10n.removeSavedJob : context.l10n.saveJob,
                 visualDensity: VisualDensity.compact,
                 constraints: BoxConstraints.tightFor(width: 34.w, height: 38.h),
                 padding: EdgeInsets.zero,
@@ -119,16 +121,16 @@ class JobListingCard extends StatelessWidget {
             runSpacing: 6.h,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              _JobTag(job.location),
+              _JobTag(job.localizedLocation(context.l10n)),
               const _MetadataDot(),
-              _JobTag(job.experience),
+              _JobTag(job.localizedExperience(context.l10n)),
               if (job.employmentType.isNotEmpty) ...[
                 const _MetadataDot(),
-                _JobTag(job.employmentType),
+                _JobTag(job.localizedEmploymentType(context.l10n)),
               ],
               if (job.workArrangement.isNotEmpty) ...[
                 Text(
-                  job.workArrangement,
+                  job.localizedWorkArrangement(context.l10n),
                   style: homeTextStyle(
                     AppTextStyles.labelSmall.copyWith(
                       color: AppColors.textPrimary,
@@ -138,7 +140,7 @@ class JobListingCard extends StatelessWidget {
                 const _MetadataDot(),
               ],
               Text(
-                job.posted,
+                job.localizedPosted(context.l10n),
                 style: homeTextStyle(
                   AppTextStyles.labelSmall.copyWith(
                     color: AppColors.textSecondary,
@@ -167,7 +169,7 @@ class JobListingCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20.r),
                       ),
                       child: Text(
-                        '• ${job.matchLabel}',
+                        '• ${job.localizedMatchLabel(context.l10n)}',
                         style: AppTextStyles.labelSmall.copyWith(
                           color: matchColor,
                           fontWeight: FontWeight.w600,
@@ -177,7 +179,7 @@ class JobListingCard extends StatelessWidget {
                     ),
                     SizedBox(height: 4.h),
                     Text(
-                      job.matchDescription,
+                      job.localizedMatchDescription(context.l10n),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppTextStyles.labelSmall.copyWith(
@@ -202,7 +204,7 @@ class JobListingCard extends StatelessWidget {
                     ),
                     textStyle: homeTextStyle(AppTextStyles.labelMedium),
                   ),
-                  child: const Text('Apply Now'),
+                  child: Text(context.l10n.applyNow),
                 ),
               ),
             ],

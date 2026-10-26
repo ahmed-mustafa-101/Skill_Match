@@ -12,6 +12,7 @@ import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/feedback/app_loader.dart';
 import 'package:skillmatch/core/design_system/widgets/media/app_assets.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -83,7 +84,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       child: Image.asset(
                         AppAssets.appIcon,
                         fit: BoxFit.contain,
-                        semanticLabel: 'SkillMatch app icon',
+                        semanticLabel: context.l10n.appIconSemantic,
                       ),
                     ),
                     SizedBox(height: AppSpacing.space12.h),
@@ -91,11 +92,11 @@ class _SplashScreenState extends State<SplashScreen> {
                       AppAssets.appLogo,
                       width: logoWidth,
                       fit: BoxFit.contain,
-                      semanticLabel: 'SkillMatch',
+                      semanticLabel: context.l10n.appName,
                     ),
                     SizedBox(height: AppSpacing.space8.h),
                     AppText(
-                      'Professional Compatibility and Skills Platform',
+                      context.l10n.splashTagline,
                       textAlign: TextAlign.center,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

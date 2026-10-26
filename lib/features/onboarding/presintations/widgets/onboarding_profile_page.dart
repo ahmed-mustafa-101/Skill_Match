@@ -9,6 +9,7 @@ import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
 import 'package:skillmatch/features/onboarding/presintations/widgets/custom_widget.dart';
 import 'package:skillmatch/features/onboarding/presintations/widgets/onboarding_dotted_connector.dart';
 import 'package:skillmatch/features/onboarding/presintations/widgets/onboarding_profile_step.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class OnboardingProfilePage extends StatelessWidget {
   const OnboardingProfilePage({
@@ -29,11 +30,11 @@ class OnboardingProfilePage extends StatelessWidget {
           Expanded(
             child: Center(
               child: Row(
-                children: const [
+                children: [
                   Expanded(
                     child: OnboardingProfileStep(
                       icon: Icons.description_outlined,
-                      label: 'CV',
+                      label: context.l10n.profileCvLabel,
                       color: AppColors.primary,
                     ),
                   ),
@@ -41,7 +42,7 @@ class OnboardingProfilePage extends StatelessWidget {
                   Expanded(
                     child: OnboardingProfileStep(
                       icon: Icons.work_outline,
-                      label: 'Target',
+                      label: context.l10n.profileTargetLabel,
                       color: AppColors.secondary,
                     ),
                   ),
@@ -49,7 +50,7 @@ class OnboardingProfilePage extends StatelessWidget {
                   Expanded(
                     child: OnboardingProfileStep(
                       icon: Icons.flag_outlined,
-                      label: 'Roadmap',
+                      label: context.l10n.profileRoadmapLabel,
                       color: AppColors.accent,
                     ),
                   ),
@@ -70,29 +71,29 @@ class OnboardingProfilePage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 AppText(
-                  'Let’s set up your career profile',
+                  context.l10n.profileTitle,
                   style: AppTextStyles.sectionHeading.copyWith(
                     color: AppColors.textPrimary,
                   ),
                 ),
                 SizedBox(height: AppSpacing.space12.h),
-                const OnboardingProfileBenefit(
+                OnboardingProfileBenefit(
                   color: AppColors.secondary,
-                  label: 'Upload your CV (optional)',
+                  label: context.l10n.uploadCvOptional,
                 ),
                 SizedBox(height: AppSpacing.space8.h),
-                const OnboardingProfileBenefit(
+                OnboardingProfileBenefit(
                   color: AppColors.primary,
-                  label: 'Choose your target role',
+                  label: context.l10n.chooseTargetRole,
                 ),
                 SizedBox(height: AppSpacing.space8.h),
-                const OnboardingProfileBenefit(
+                OnboardingProfileBenefit(
                   color: AppColors.accent,
-                  label: 'Get your roadmap and weekly actions',
+                  label: context.l10n.weeklyRoadmapActions,
                 ),
                 SizedBox(height: AppSpacing.space20.h),
                 AppButton(
-                  text: 'Start',
+                  text: context.l10n.startAction,
                   onPressed: onStart,
                   textStyle: AppTextStyles.buttonLarge,
                 ),
@@ -106,7 +107,7 @@ class OnboardingProfilePage extends StatelessWidget {
                       foregroundColor: AppColors.secondary,
                     ),
                     child: AppText(
-                      'Not now',
+                      context.l10n.notNow,
                       style: AppTextStyles.bodyMedium.copyWith(
                         color: AppColors.secondary,
                       ),

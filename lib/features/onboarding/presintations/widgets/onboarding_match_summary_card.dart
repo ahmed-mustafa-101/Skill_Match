@@ -4,6 +4,7 @@ import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/spacing/app_radius.dart';
 import 'package:skillmatch/core/design_system/spacing/app_spacing.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class OnboardingMatchSummaryCard extends StatelessWidget {
   const OnboardingMatchSummaryCard({super.key});
@@ -44,7 +45,7 @@ class OnboardingMatchSummaryCard extends StatelessWidget {
               SizedBox(width: AppSpacing.space8.w),
               Expanded(
                 child: Text(
-                  'Flutter Developer Intern',
+                  context.l10n.onboardingSampleJob,
                   style: AppTextStyles.labelLarge.copyWith(
                     color: AppColors.textPrimary,
                   ),
@@ -58,7 +59,7 @@ class OnboardingMatchSummaryCard extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'TechNova • Cairo • Hybrid',
+                  context.l10n.onboardingCompanyLocation,
                   style: AppTextStyles.bodySmall.copyWith(
                     color: AppColors.textSecondary,
                   ),
@@ -104,7 +105,7 @@ class _OnboardingStatusChip extends StatelessWidget {
         border: Border.all(color: AppColors.success.withValues(alpha: .2)),
       ),
       child: Text(
-        'Strong match',
+        context.l10n.strongMatch,
         style: AppTextStyles.labelSmall.copyWith(color: AppColors.success),
       ),
     );

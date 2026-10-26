@@ -6,6 +6,7 @@ import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/buttons/app_button.dart';
 import 'package:skillmatch/core/design_system/widgets/media/app_assets.dart';
 import 'package:skillmatch/features/onboarding/presintations/widgets/onboarding_llustration_card.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class OnboardingIntroPage extends StatelessWidget {
   const OnboardingIntroPage({super.key, required this.onContinue});
@@ -23,15 +24,15 @@ class OnboardingIntroPage extends StatelessWidget {
               child: Image.asset(
                 AppAssets.onboardingMatch,
                 fit: BoxFit.contain,
-                semanticLabel: 'A CV and phone connected by a job match',
+                semanticLabel: context.l10n.introImageSemantic,
               ),
             ),
           ),
           SizedBox(height: AppSpacing.space24.h),
           Align(
-            alignment: Alignment.centerLeft,
+            alignment: AlignmentDirectional.centerStart,
             child: Text(
-              'Turn your CV into opportunities',
+              context.l10n.introTitle,
               style: AppTextStyles.sectionHeading.copyWith(
                 color: AppColors.textPrimary,
               ),
@@ -39,9 +40,9 @@ class OnboardingIntroPage extends StatelessWidget {
           ),
           SizedBox(height: AppSpacing.space8.h),
           Align(
-            alignment: Alignment.centerLeft,
+            alignment: AlignmentDirectional.centerStart,
             child: Text(
-              'See why a job fits you, what you’re missing, and what to do next.',
+              context.l10n.introDescription,
               style: AppTextStyles.bodyLarge.copyWith(
                 color: AppColors.textSecondary,
               ),
@@ -49,7 +50,7 @@ class OnboardingIntroPage extends StatelessWidget {
           ),
           SizedBox(height: AppSpacing.space20.h),
           AppButton(
-            text: 'Continue',
+            text: context.l10n.continueAction,
             onPressed: onContinue,
             textStyle: AppTextStyles.buttonLarge,
           ),

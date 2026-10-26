@@ -17,6 +17,7 @@ import 'package:skillmatch/core/routing/app_routes.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_page_layout.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_security_banner.dart';
 import 'package:skillmatch/features/auth/presintations/widgets/auth_validators.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -40,8 +41,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AuthPageLayout(
-      title: 'Log in',
+        return AuthPageLayout(
+      title: context.l10n.loginTitle,
       onBack: () => context.go(AppRoutes.onboardingScreen),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
               borderRadius: BorderRadius.circular(4.r),
             ),
             child: Text(
-              'SKILLMATCH PORTAL',
+              context.l10n.skillMatchPortal,
               style: AppTextStyles.labelSmall.copyWith(
                 color: AppColors.textSecondary,
                 fontWeight: FontWeight.w700,
@@ -67,14 +68,14 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           SizedBox(height: AppSpacing.space8.h),
           AppText(
-            'Welcome back',
+            context.l10n.welcomeBack,
             style: AppTextStyles.sectionHeadingLarge.copyWith(
               color: AppColors.textPrimary,
             ),
           ),
           SizedBox(height: AppSpacing.space4.h),
           AppText(
-            'Access your verified career pathways and opportunities.',
+            context.l10n.loginDescription,
             style: AppTextStyles.bodyMedium.copyWith(
               color: AppColors.textSecondary,
             ),
@@ -91,17 +92,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppTextField(
-                    label: 'Email address',
+                    label: context.l10n.emailAddress,
                     controller: _emailController,
                     type: AppTextFieldType.email,
-                    validator: AuthValidators.email,
+                    validator: AuthValidators.email(context.l10n),
                   ),
                   SizedBox(height: AppSpacing.space12.h),
                   AppTextField(
-                    label: 'Password',
+                    label: context.l10n.password,
                     controller: _passwordController,
                     type: AppTextFieldType.password,
-                    validator: AuthValidators.required,
+                    validator: AuthValidators.required(context.l10n),
                     textInputAction: TextInputAction.done,
                   ),
                   SizedBox(height: AppSpacing.space12.h),
@@ -123,13 +124,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             AppText(
-                              'Keep me signed in',
+                              context.l10n.keepMeSignedIn,
                               style: AppTextStyles.bodySmall.copyWith(
                                 color: AppColors.textPrimary,
                               ),
                             ),
                             AppText(
-                              'Only on trusted devices',
+                              context.l10n.trustedDevicesOnly,
                               style: AppTextStyles.labelSmall.copyWith(
                                 color: AppColors.textSecondary,
                               ),
@@ -138,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       AppButton(
-                        text: 'Forgot password?',
+                        text: context.l10n.forgotPassword,
                         width: 150.w,
                         variant: AppButtonVariant.text,
                         height: 48.h,
@@ -152,16 +153,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: AppSpacing.space12.h),
                   AppButton(
-                    text: 'Log in',
+                    text: context.l10n.loginTitle,
                     textStyle: AppTextStyles.buttonSmall,
                     onPressed: () => context.go(AppRoutes.homeScreen),
                     height: 50.h,
                   ),
                   SizedBox(height: AppSpacing.space12.h),
-                  const AppDivider(label: 'or'),
+                  AppDivider(label: context.l10n.or),
                   SizedBox(height: AppSpacing.space12.h),
                   AppButton(
-                    text: 'Continue with Google',
+                    text: context.l10n.continueWithGoogle,
                     variant: AppButtonVariant.outlined,
                     foregroundColor: AppColors.textPrimary,
                     borderRadius: AppRadius.radius12.r,
@@ -171,11 +172,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       assetPath: AppAssets.googleLogo,
                       width: 20.w,
                       height: 20.h,
-                      semanticLabel: 'Google',
+                      semanticLabel: context.l10n.google,
                     ),
                     onPressed: () => AppSnackBar.info(
                       context,
-                      message: 'Google sign-in is not connected yet.',
+                      message: context.l10n.googleSignInUnavailable,
                     ),
                   ),
                 ],
@@ -190,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
                 AppText(
-                  'New here? ',
+                  context.l10n.newHere,
                   style: AppTextStyles.bodyMedium.copyWith(
                     color: AppColors.textPrimary,
                   ),
@@ -198,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 GestureDetector(
                   onTap: () => context.go(AppRoutes.registerScreen),
                   child: AppText(
-                    'Create account',
+                    context.l10n.createAccount,
                     style: AppTextStyles.bodyMedium.copyWith(
                       color: AppColors.secondary,
                     ),
