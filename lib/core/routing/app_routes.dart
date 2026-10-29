@@ -12,4 +12,7 @@ class AppRoutes {
   static const String homeScreen = '/home';
   static const String savedJobsScreen = '/saved';
   static const String profileScreen = '/profile';
+  static const String editProfileScreen = '/profile/edit';
+  static const String settingsScreen = '/settings';
+  static const String notificationsScreen = '/notifications';
 }

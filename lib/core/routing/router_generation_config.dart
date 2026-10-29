@@ -2,8 +2,13 @@ import 'package:go_router/go_router.dart';
 import 'package:skillmatch/core/routing/app_routes.dart';
 import 'package:skillmatch/features/home/presentation/screens/home_shell_screen.dart';
 import 'package:skillmatch/features/home/presentation/screens/home_screen.dart';
-import 'package:skillmatch/features/home/presentation/screens/saved_jobs_screen.dart';
-import 'package:skillmatch/features/home/presentation/screens/tab_placeholder_screen.dart';
+import 'package:skillmatch/features/chat_bot/presentation/screens/chat_bot_screen.dart';
+import 'package:skillmatch/features/roadmap/presentation/screens/roadmap_screen.dart';
+import 'package:skillmatch/features/saved_jobs/presentation/screens/saved_jobs_screen.dart';
+import 'package:skillmatch/features/settings/presentation/screens/settings_screen.dart';
+import 'package:skillmatch/features/notifications/presentation/screens/notifications_screen.dart';
+import 'package:skillmatch/features/profile/presentation/screens/profile_screen.dart';
+import 'package:skillmatch/features/profile/presentation/screens/edit_profile_screen.dart';
 import 'package:skillmatch/features/auth/presintations/screens/login/login_screen.dart';
 import 'package:skillmatch/features/auth/presintations/screens/forget_password/new_password_screen.dart';
 import 'package:skillmatch/features/auth/presintations/screens/forget_password/password_updated_screen.dart';
@@ -12,7 +17,6 @@ import 'package:skillmatch/features/auth/presintations/screens/forget_password/r
 import 'package:skillmatch/features/auth/presintations/screens/forget_password/verify_code_screen.dart';
 import 'package:skillmatch/features/onboarding/presintations/screens/onboarding_screen.dart';
 import 'package:skillmatch/features/splash/presintations/screens/splash_screen.dart';
-import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class RouterGenerationConfig {
   static GoRouter goRouter = GoRouter(
@@ -58,6 +62,18 @@ class RouterGenerationConfig {
         path: AppRoutes.passwordUpdatedScreen,
         builder: (context, state) => const PasswordUpdatedScreen(),
       ),
+      GoRoute(
+        path: AppRoutes.settingsScreen,
+        builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.notificationsScreen,
+        builder: (context, state) => const NotificationsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.editProfileScreen,
+        builder: (context, state) => const EditProfileScreen(),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) =>
             HomeShellScreen(navigationShell: navigationShell),
@@ -66,8 +82,7 @@ class RouterGenerationConfig {
             routes: [
               GoRoute(
                 path: AppRoutes.chatBotScreen,
-                builder: (context, state) =>
-                    TabPlaceholderScreen(title: context.l10n.navChatBot),
+                builder: (context, state) => const ChatBotScreen(),
               ),
             ],
           ),
@@ -75,8 +90,7 @@ class RouterGenerationConfig {
             routes: [
               GoRoute(
                 path: AppRoutes.roadmapScreen,
-                builder: (context, state) =>
-                    TabPlaceholderScreen(title: context.l10n.navRoadmap),
+                builder: (context, state) => const RoadmapScreen(),
               ),
             ],
           ),
@@ -100,8 +114,7 @@ class RouterGenerationConfig {
             routes: [
               GoRoute(
                 path: AppRoutes.profileScreen,
-                builder: (context, state) =>
-                    TabPlaceholderScreen(title: context.l10n.navProfile),
+                builder: (context, state) => const ProfileScreen(),
               ),
             ],
           ),
