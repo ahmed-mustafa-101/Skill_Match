@@ -4,7 +4,6 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:skillmatch/core/design_system/spacing/app_spacing.dart';
 import 'package:skillmatch/features/home/data/job_sample_data.dart';
 import 'package:skillmatch/features/home/domain/entities/job_listing.dart';
-import 'package:skillmatch/features/home/presentation/state/saved_jobs_cubit.dart';
 import 'package:skillmatch/features/home/presentation/utils/home_job_filter.dart';
 import 'package:skillmatch/features/home/presentation/widgets/home_empty_search_state.dart';
 import 'package:skillmatch/features/home/presentation/widgets/home_header.dart';
@@ -13,6 +12,7 @@ import 'package:skillmatch/features/home/presentation/widgets/home_search_bar.da
 import 'package:skillmatch/features/home/presentation/widgets/job_listing_card.dart';
 import 'package:skillmatch/features/home/presentation/widgets/job_filter_sheet.dart';
 import 'package:skillmatch/features/home/presentation/widgets/job_match_banner.dart';
+import 'package:skillmatch/features/saved_jobs/presentation/state/saved_jobs_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

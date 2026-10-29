@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:go_router/go_router.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
+import 'package:skillmatch/core/routing/app_routes.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/media/app_assets.dart';
 import 'package:skillmatch/core/design_system/widgets/media/app_image.dart';
@@ -31,13 +33,13 @@ class HomeHeader extends StatelessWidget {
                 icon: Icons.notifications_none_rounded,
                 label: 'Notifications',
                 showBadge: true,
-                onPressed: () {},
+                onPressed: () => context.push(AppRoutes.notificationsScreen),
               ),
               SizedBox(width: 8.w),
               HeaderAction(
                 icon: Icons.settings_outlined,
                 label: 'Settings',
-                onPressed: () {},
+                onPressed: () => context.push(AppRoutes.settingsScreen),
               ),
             ],
           ),

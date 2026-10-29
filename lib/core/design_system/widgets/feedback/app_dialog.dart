@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/spacing/app_spacing.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
-import 'package:skillmatch/core/design_system/widgets/buttons/app_button.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
 
 final class AppDialog {
@@ -15,18 +14,24 @@ final class AppDialog {
     String confirmText = 'Confirm',
     String cancelText = 'Cancel',
     bool barrierDismissible = false,
+    TextDirection? textDirection,
   }) async {
     final result = await showDialog<bool>(
       context: context,
       barrierDismissible: barrierDismissible,
       barrierColor: AppColors.scrim,
-      builder: (context) => _AppDialog(
-        title: title,
-        message: message,
-        confirmText: confirmText,
-        cancelText: cancelText,
-        isDestructive: true,
-      ),
+      builder: (context) {
+        final dialog = _AppDialog(
+          title: title,
+          message: message,
+          confirmText: confirmText,
+          cancelText: cancelText,
+          isDestructive: true,
+        );
+        return textDirection == null
+            ? dialog
+            : Directionality(textDirection: textDirection, child: dialog);
+      },
     );
 
     return result ?? false;
@@ -85,11 +90,8 @@ class _AppDialog extends StatelessWidget {
             child: AppText(cancelText!, color: AppColors.textSecondary),
           ),
 
-        AppButton(
-          text: confirmText,
-          variant: isDestructive
-              ? AppButtonVariant.danger
-              : AppButtonVariant.primary,
+        TextButton(
+          child: AppText(confirmText, color: AppColors.error),
           onPressed: () => Navigator.pop(context, true),
         ),
       ],
