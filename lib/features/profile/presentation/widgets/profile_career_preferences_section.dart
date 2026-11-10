@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skillmatch/features/profile/presentation/widgets/profile_preferences_row.dart';
 import 'package:skillmatch/features/profile/presentation/widgets/profile_section_card.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class ProfileCareerPreferencesSection extends StatelessWidget {
   const ProfileCareerPreferencesSection({super.key});
@@ -8,21 +9,30 @@ class ProfileCareerPreferencesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProfileSectionCard(
-      title: 'Career Preferences',
+      title: context.l10n.profileCareerPreferences,
       trailing: IconButton(
         onPressed: () {},
         icon: const Icon(Icons.edit_outlined),
         padding: EdgeInsets.zero,
         constraints: const BoxConstraints(),
       ),
-      children: const [
-        ProfilePreferencesRow(label: 'Target role', value: 'Flutter Developer'),
+      children: [
         ProfilePreferencesRow(
-          label: 'Job type',
-          value: 'Full-time / Internship',
+          label: context.l10n.profileTargetRole,
+          value: context.l10n.roadmapRoleFlutterDeveloper,
         ),
-        ProfilePreferencesRow(label: 'Preferred location', value: 'Cairo'),
-        ProfilePreferencesRow(label: 'Experience', value: 'Entry Level'),
+        ProfilePreferencesRow(
+          label: context.l10n.profileJobType,
+          value: context.l10n.profileFullTimeInternship,
+        ),
+        ProfilePreferencesRow(
+          label: context.l10n.profilePreferredLocation,
+          value: context.l10n.cairo,
+        ),
+        ProfilePreferencesRow(
+          label: context.l10n.profileExperience,
+          value: context.l10n.profileEntryLevel,
+        ),
       ],
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 import 'package:skillmatch/features/profile/presentation/widgets/profile_chip.dart';
 import 'package:skillmatch/features/profile/presentation/widgets/profile_section_card.dart';
 
@@ -11,8 +12,8 @@ class ProfileExperienceSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProfileSectionCard(
-      title: 'Experience',
-      status: 'Good',
+      title: context.l10n.profileExperienceSection,
+      status: context.l10n.profileCvGood,
       trailing: IconButton(
         onPressed: () {},
         icon: const Icon(Icons.edit_outlined),
@@ -22,15 +23,15 @@ class ProfileExperienceSection extends StatelessWidget {
       children: [
         Row(
           children: [
-            const Expanded(
+            Expanded(
               child: AppText(
-                'Flutter Developer Intern',
+                context.l10n.flutterDeveloperIntern,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 color: AppColors.textPrimary,
               ),
             ),
             AppText(
-              'Jun 2025 – Sep 2025',
+              context.l10n.profileExperienceDates,
               style: Theme.of(context).textTheme.bodySmall,
               color: AppColors.textSecondary,
             ),
@@ -38,13 +39,13 @@ class ProfileExperienceSection extends StatelessWidget {
         ),
         SizedBox(height: 6.h),
         AppText(
-          'Tech Solutions',
+          context.l10n.profileTechSolutions,
           style: Theme.of(context).textTheme.bodyMedium,
           color: AppColors.textSecondary,
         ),
         SizedBox(height: 8.h),
         AppText(
-          'Built mobile features and integrated REST APIs.',
+          context.l10n.profileExperienceDescription,
           style: Theme.of(context).textTheme.bodyMedium,
           color: AppColors.textPrimary,
         ),

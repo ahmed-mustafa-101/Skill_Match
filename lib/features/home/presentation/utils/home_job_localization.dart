@@ -8,6 +8,8 @@ extension HomeJobLocalization on JobListing {
     'junior-software-engineer' => l10n.juniorSoftwareEngineer,
     'frontend-developer' => l10n.frontendDeveloper,
     'product-design-intern' => l10n.productDesignIntern,
+    'mobile-developer-pixelstack' => l10n.mobileDeveloper,
+    'flutter-developer-intern' => l10n.flutterDeveloperIntern,
     _ => title,
   };
 
@@ -60,6 +62,8 @@ extension HomeJobLocalization on JobListing {
     'Matches problem solving skills' => l10n.matchProblemSolving,
     'Matches your web development skills' => l10n.matchWebDevelopment,
     'Build on your design fundamentals' => l10n.matchDesignFundamentals,
+    'Matches your Flutter skills' => l10n.matchFlutterSkills,
+    'Matches your engineering skills' => l10n.matchEngineeringSkills,
     _ => matchDescription,
   };
 }

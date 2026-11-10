@@ -4,21 +4,25 @@ import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/spacing/app_radius.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class ChatBotWelcomePanel extends StatelessWidget {
   const ChatBotWelcomePanel({super.key, required this.onPromptSelected});
 
   final ValueChanged<String> onPromptSelected;
 
-  static const _prompts = [
-    (icon: Icons.work_outline_rounded, label: 'Find matching jobs'),
-    (icon: Icons.description_outlined, label: 'Improve my CV'),
-    (icon: Icons.route_outlined, label: 'Plan my career path'),
-    (icon: Icons.record_voice_over_outlined, label: 'Practice an interview'),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final prompts = [
+      (icon: Icons.work_outline_rounded, label: context.l10n.chatBotPromptJobs),
+      (icon: Icons.description_outlined, label: context.l10n.chatBotPromptCv),
+      (icon: Icons.route_outlined, label: context.l10n.chatBotPromptCareer),
+      (
+        icon: Icons.record_voice_over_outlined,
+        label: context.l10n.chatBotPromptInterview,
+      ),
+    ];
+
     return Center(
       child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(20.w, 24.h, 20.w, 20.h),
@@ -40,7 +44,7 @@ class ChatBotWelcomePanel extends StatelessWidget {
             ),
             SizedBox(height: 20.h),
             AppText(
-              'Your next opportunity\\nstarts here.',
+              context.l10n.chatBotWelcomeTitle,
               style: AppTextStyles.headlineSmall,
               color: AppColors.primary,
               fontWeight: FontWeight.w700,
@@ -48,7 +52,7 @@ class ChatBotWelcomePanel extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             AppText(
-              'Ask me about your career, skills, or job search. Let’s make your next move count.',
+              context.l10n.chatBotWelcomeDescription,
               style: AppTextStyles.bodyMedium,
               color: AppColors.textSecondary,
               textAlign: TextAlign.center,
@@ -57,7 +61,7 @@ class ChatBotWelcomePanel extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: AppText(
-                'TRY ASKING',
+                context.l10n.chatBotTryAsking,
                 style: AppTextStyles.labelSmall,
                 color: AppColors.textSecondary,
                 fontWeight: FontWeight.w700,
@@ -65,27 +69,27 @@ class ChatBotWelcomePanel extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10.h),
-            for (var index = 0; index < _prompts.length; index += 2) ...[
+            for (var index = 0; index < prompts.length; index += 2) ...[
               Row(
                 children: [
                   Expanded(
                     child: _PromptCard(
-                      icon: _prompts[index].icon,
-                      label: _prompts[index].label,
-                      onTap: () => onPromptSelected(_prompts[index].label),
+                      icon: prompts[index].icon,
+                      label: prompts[index].label,
+                      onTap: () => onPromptSelected(prompts[index].label),
                     ),
                   ),
                   SizedBox(width: 10.w),
                   Expanded(
                     child: _PromptCard(
-                      icon: _prompts[index + 1].icon,
-                      label: _prompts[index + 1].label,
-                      onTap: () => onPromptSelected(_prompts[index + 1].label),
+                      icon: prompts[index + 1].icon,
+                      label: prompts[index + 1].label,
+                      onTap: () => onPromptSelected(prompts[index + 1].label),
                     ),
                   ),
                 ],
               ),
-              if (index + 2 < _prompts.length) SizedBox(height: 10.h),
+              if (index + 2 < prompts.length) SizedBox(height: 10.h),
             ],
           ],
         ),

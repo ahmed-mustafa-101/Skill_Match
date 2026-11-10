@@ -3,6 +3,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/widgets/layout/app_card.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class ProfileHeaderCard extends StatelessWidget {
   const ProfileHeaderCard({super.key});
@@ -32,14 +33,14 @@ class ProfileHeaderCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppText(
-                      'Ahmed Mohamed',
+                      context.l10n.profileName,
                       style: Theme.of(context).textTheme.headlineSmall,
                       fontWeight: FontWeight.w700,
                       color: AppColors.textPrimary,
                     ),
                     SizedBox(height: 4.h),
                     AppText(
-                      'Junior Flutter Developer',
+                      context.l10n.profileRole,
                       style: Theme.of(context).textTheme.titleSmall,
                       color: AppColors.textSecondary,
                     ),
@@ -53,7 +54,7 @@ class ProfileHeaderCard extends StatelessWidget {
                         ),
                         SizedBox(width: 4.w),
                         AppText(
-                          'Cairo, Egypt',
+                          context.l10n.profileLocation,
                           style: Theme.of(context).textTheme.bodySmall,
                           color: AppColors.textSecondary,
                         ),
@@ -65,7 +66,7 @@ class ProfileHeaderCard extends StatelessWidget {
                         ),
                         SizedBox(width: 4.w),
                         AppText(
-                          'Entry Level',
+                          context.l10n.profileEntryLevel,
                           style: Theme.of(context).textTheme.bodySmall,
                           color: AppColors.textSecondary,
                         ),
@@ -78,7 +79,7 @@ class ProfileHeaderCard extends StatelessWidget {
           ),
           SizedBox(height: 16.h),
           AppText(
-            'Looking for Flutter and Mobile Development opportunities.',
+            context.l10n.profileLookingFor,
             style: Theme.of(context).textTheme.bodyLarge,
             color: AppColors.textPrimary,
           ),

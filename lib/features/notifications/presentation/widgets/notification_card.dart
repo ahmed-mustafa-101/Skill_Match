@@ -7,11 +7,7 @@ import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
 import 'package:skillmatch/features/notifications/domain/entities/notification_item.dart';
 
 class NotificationCard extends StatelessWidget {
-  const NotificationCard({
-    super.key,
-    required this.item,
-    required this.onTap,
-  });
+  const NotificationCard({super.key, required this.item, required this.onTap});
 
   final NotificationItem item;
   final VoidCallback onTap;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:intl/intl.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/spacing/app_radius.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
@@ -70,7 +71,8 @@ class ChatMessageBubble extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerRight,
                     child: AppText(
-                      _formatTime(message.sentAt),
+                      DateFormat.jm(Localizations.localeOf(context).toString())
+                          .format(message.sentAt),
                       style: AppTextStyles.labelSmall,
                       color: _isUser
                           ? AppColors.onPrimary.withValues(alpha: .72)
@@ -84,12 +86,5 @@ class ChatMessageBubble extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String _formatTime(DateTime time) {
-    final hour = time.hour % 12 == 0 ? 12 : time.hour % 12;
-    final minute = time.minute.toString().padLeft(2, '0');
-    final period = time.hour < 12 ? 'AM' : 'PM';
-    return '$hour:$minute $period';
   }
 }

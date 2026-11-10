@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 import 'package:skillmatch/core/routing/app_routes.dart';
 
 class ProfileActionButton extends StatelessWidget {
@@ -20,7 +21,7 @@ class ProfileActionButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(14.r),
           ),
         ),
-        child: const Text('Edit Profile'),
+        child: Text(context.l10n.profileEdit),
       ),
     );
   }

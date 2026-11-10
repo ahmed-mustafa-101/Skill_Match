@@ -5,6 +5,7 @@ import 'package:skillmatch/core/design_system/spacing/app_spacing.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/inputs/app_search_field.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class SavedJobsHeader extends StatelessWidget {
   const SavedJobsHeader({
@@ -35,7 +36,7 @@ class SavedJobsHeader extends StatelessWidget {
             Expanded(
               child: AppSearchField(
                 controller: searchController,
-                hintText: 'Search jobs',
+                hintText: context.l10n.savedSearchJobs,
                 autofocus: true,
                 onChanged: onSearchChanged,
               ),
@@ -43,7 +44,7 @@ class SavedJobsHeader extends StatelessWidget {
           else
             Expanded(
               child: AppText(
-                'Saved Jobs',
+                context.l10n.savedJobsTitle,
                 style: AppTextStyles.headlineSmall.copyWith(
                   color: AppColors.primary,
                   fontWeight: FontWeight.w700,
@@ -52,7 +53,9 @@ class SavedJobsHeader extends StatelessWidget {
               ),
             ),
           IconButton(
-            tooltip: isSearching ? 'Close search' : 'Search jobs',
+            tooltip: isSearching
+                ? context.l10n.savedCloseSearch
+                : context.l10n.savedSearchJobs,
             onPressed: onSearchPressed,
             icon: Icon(
               isSearching ? Icons.close_rounded : Icons.search_rounded,

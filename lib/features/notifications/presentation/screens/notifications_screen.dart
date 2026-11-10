@@ -3,6 +3,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skillmatch/core/design_system/app_bar/app_app_bar.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 import 'package:skillmatch/core/design_system/spacing/app_spacing.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
 import 'package:skillmatch/features/notifications/data/notifications_sample_data.dart';
@@ -18,61 +19,63 @@ class NotificationsScreen extends StatefulWidget {
 }
 
 class _NotificationsScreenState extends State<NotificationsScreen> {
-  late final List<NotificationItem> _items = List.of(
-    NotificationsSampleData.items,
-  );
   NotificationCategory _selectedCategory = NotificationCategory.all;
+  final Set<String> _readNotificationIds = {};
 
   @override
   Widget build(BuildContext context) {
+    final items = NotificationsSampleData.items(context.l10n)
+        .map(
+          (item) => item.copyWith(
+            isRead: item.isRead || _readNotificationIds.contains(item.id),
+          ),
+        )
+        .toList();
     final filteredItems = _selectedCategory == NotificationCategory.all
-        ? _items
-        : _items.where((item) => item.category == _selectedCategory).toList();
+        ? items
+        : items.where((item) => item.category == _selectedCategory).toList();
 
-    return Directionality(
-      textDirection: TextDirection.ltr,
-      child: Scaffold(
-        appBar: AppAppBar(
-          title: AppText(
-            'Notifications',
-            style: Theme.of(context).textTheme.titleLarge,
-            fontWeight: FontWeight.w600,
-            color: AppColors.primary,
-          ),
-          centerTitle: false,
-          leading: IconButton(
-            tooltip: 'Back',
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => context.pop(),
-          ),
-          actions: [
-            TextButton(
-              onPressed: _markAllRead,
-              child: const AppText(
-                'Mark all read',
-                color: AppColors.secondary,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            SizedBox(width: 8.w),
-          ],
+    return Scaffold(
+      appBar: AppAppBar(
+        title: AppText(
+          context.l10n.notifications,
+          style: Theme.of(context).textTheme.titleLarge,
+          fontWeight: FontWeight.w600,
+          color: AppColors.primary,
         ),
-        body: Column(
-          children: [
-            const Divider(height: 1),
-            NotificationFilterChips(
-              selectedCategory: _selectedCategory,
-              onChanged: (category) =>
-                  setState(() => _selectedCategory = category),
-            ),
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 24.h),
-                children: _buildNotificationList(filteredItems),
-              ),
-            ),
-          ],
+        centerTitle: false,
+        leading: IconButton(
+          tooltip: context.l10n.back,
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => context.pop(),
         ),
+        actions: [
+          TextButton(
+            onPressed: _markAllRead,
+            child: AppText(
+              context.l10n.notificationsMarkAllRead,
+              color: AppColors.secondary,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          SizedBox(width: 8.w),
+        ],
+      ),
+      body: Column(
+        children: [
+          const Divider(height: 1),
+          NotificationFilterChips(
+            selectedCategory: _selectedCategory,
+            onChanged: (category) =>
+                setState(() => _selectedCategory = category),
+          ),
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 24.h),
+              children: _buildNotificationList(filteredItems),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -81,7 +84,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     if (items.isEmpty) {
       return [
         SizedBox(height: 100.h),
-        const Center(child: AppText('No notifications in this category.')),
+        Center(child: AppText(context.l10n.notificationsEmptyCategory)),
       ];
     }
 
@@ -113,16 +116,15 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   }
 
   void _markRead(NotificationItem item) {
-    final index = _items.indexOf(item);
-    if (index == -1 || item.isRead) return;
-    setState(() => _items[index] = item.copyWith(isRead: true));
+    if (item.isRead || !_readNotificationIds.add(item.id)) return;
+    setState(() {});
   }
 
   void _markAllRead() {
     setState(() {
-      for (var index = 0; index < _items.length; index++) {
-        _items[index] = _items[index].copyWith(isRead: true);
-      }
+      _readNotificationIds.addAll(
+        NotificationsSampleData.items(context.l10n).map((item) => item.id),
+      );
     });
   }
 }

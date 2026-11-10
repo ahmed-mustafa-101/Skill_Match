@@ -3,6 +3,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/widgets/layout/app_card.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 import 'package:skillmatch/features/profile/presentation/widgets/profile_chip.dart';
 import 'package:skillmatch/features/profile/presentation/widgets/profile_section_card.dart';
 
@@ -12,8 +13,8 @@ class ProfileProjectsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProfileSectionCard(
-      title: 'Projects',
-      status: 'Needs Improvement',
+      title: context.l10n.profileProjects,
+      status: context.l10n.profileNeedsImprovement,
       trailing: IconButton(
         onPressed: () {},
         icon: const Icon(Icons.edit_outlined),
@@ -21,14 +22,14 @@ class ProfileProjectsSection extends StatelessWidget {
         constraints: const BoxConstraints(),
       ),
       children: [
-        const AppText(
-          'Job Finder App',
+        AppText(
+          context.l10n.profileJobFinderApp,
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
           color: AppColors.textPrimary,
         ),
         SizedBox(height: 6.h),
         AppText(
-          'Flutter application for discovering and saving job opportunities.',
+          context.l10n.profileJobFinderDescription,
           style: Theme.of(context).textTheme.bodyMedium,
           color: AppColors.textPrimary,
         ),
@@ -44,7 +45,7 @@ class ProfileProjectsSection extends StatelessWidget {
         ),
         SizedBox(height: 12.h),
         AppText(
-          'View project →',
+          context.l10n.profileViewProject,
           style: Theme.of(context).textTheme.labelLarge,
           color: AppColors.primary,
           fontWeight: FontWeight.w600,
@@ -60,7 +61,7 @@ class ProfileProjectsSection extends StatelessWidget {
               SizedBox(width: 8.w),
               Expanded(
                 child: AppText(
-                  'Add measurable outcomes or project links to strengthen this section.',
+                  context.l10n.profileProjectSuggestion,
                   style: Theme.of(context).textTheme.bodySmall,
                   color: AppColors.textSecondary,
                 ),

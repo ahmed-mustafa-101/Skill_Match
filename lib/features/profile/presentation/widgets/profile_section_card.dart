@@ -49,10 +49,7 @@ class ProfileSectionCard extends StatelessWidget {
                     color: AppColors.textSecondary,
                   ),
                 ),
-              if (trailing != null) ...[
-                SizedBox(width: 8.w),
-                trailing!,
-              ],
+              if (trailing != null) ...[SizedBox(width: 8.w), trailing!],
             ],
           ),
           if (children.isNotEmpty) SizedBox(height: 12.h),

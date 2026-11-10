@@ -5,6 +5,7 @@ import 'package:skillmatch/core/design_system/spacing/app_radius.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/layout/app_card.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class RoadmapTargetRoleCard extends StatelessWidget {
   const RoadmapTargetRoleCard({
@@ -31,7 +32,7 @@ class RoadmapTargetRoleCard extends StatelessWidget {
             children: [
               Expanded(
                 child: AppText(
-                  'TARGET ROLE',
+                  context.l10n.roadmapTargetRole,
                   style: AppTextStyles.labelSmall,
                   color: AppColors.textSecondary,
                   fontWeight: FontWeight.w600,
@@ -47,7 +48,7 @@ class RoadmapTargetRoleCard extends StatelessWidget {
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 child: AppText(
-                  'Change',
+                  context.l10n.roadmapChange,
                   style: AppTextStyles.labelMedium,
                   color: AppColors.secondary,
                   fontWeight: FontWeight.w600,
@@ -84,7 +85,7 @@ class RoadmapTargetRoleCard extends StatelessWidget {
           ),
           SizedBox(height: 6.h),
           AppText(
-            'Your roadmap is based on your current skills and job requirements.',
+            context.l10n.roadmapRoleDescription,
             style: AppTextStyles.bodySmall,
             color: AppColors.textSecondary,
           ),
@@ -97,7 +98,7 @@ class RoadmapTargetRoleCard extends StatelessWidget {
     final selectedRole = await showDialog<String>(
       context: context,
       builder: (context) => SimpleDialog(
-        title: const Text('Choose your target role'),
+        title: Text(context.l10n.roadmapChooseTargetRole),
         children: roles
             .map(
               (option) => ListTile(

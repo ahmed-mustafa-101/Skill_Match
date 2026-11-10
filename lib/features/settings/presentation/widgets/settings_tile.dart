@@ -24,10 +24,8 @@ class SettingsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final foregroundColor =
-        isDestructive ? AppColors.error : AppColors.primary;
-    final titleColor =
-        isDestructive ? AppColors.error : AppColors.textPrimary;
+    final foregroundColor = isDestructive ? AppColors.error : AppColors.primary;
+    final titleColor = isDestructive ? AppColors.error : AppColors.textPrimary;
 
     return Material(
       color: Colors.transparent,
@@ -64,9 +62,8 @@ class SettingsTile extends StatelessWidget {
                 if (value != null) ...[
                   Text(
                     value!,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: AppColors.textSecondary,
-                    ),
+                    style: Theme.of(context).textTheme.bodySmall
+                        ?.copyWith(color: AppColors.textSecondary),
                   ),
                   SizedBox(width: 6.w),
                 ],
@@ -74,9 +71,7 @@ class SettingsTile extends StatelessWidget {
                   Icon(
                     Icons.chevron_right_rounded,
                     size: 20.r,
-                    color: isDestructive
-                        ? AppColors.error
-                        : AppColors.border,
+                    color: isDestructive ? AppColors.error : AppColors.border,
                   ),
               ],
             ],

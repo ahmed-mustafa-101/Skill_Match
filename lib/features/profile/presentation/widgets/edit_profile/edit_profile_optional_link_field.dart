@@ -5,6 +5,7 @@ import 'package:skillmatch/core/design_system/spacing/app_radius.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/inputs/app_text_field.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class EditProfileOptionalLinkField extends StatelessWidget {
   const EditProfileOptionalLinkField({
@@ -41,8 +42,8 @@ class EditProfileOptionalLinkField extends StatelessWidget {
                 color: AppColors.surfaceHigh,
                 borderRadius: BorderRadius.circular(AppRadius.radiusFull),
               ),
-              child: const AppText(
-                'Optional',
+              child: AppText(
+                context.l10n.editProfileOptional,
                 style: AppTextStyles.labelSmall,
                 color: AppColors.textSecondary,
               ),

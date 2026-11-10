@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 import 'package:skillmatch/features/home/data/job_sample_data.dart';
 import 'package:skillmatch/features/home/domain/entities/job_listing.dart';
+import 'package:skillmatch/features/home/presentation/utils/home_job_localization.dart';
 import 'package:skillmatch/features/saved_jobs/data/applied_job_sample_data.dart';
 import 'package:skillmatch/features/saved_jobs/domain/entities/job_application.dart';
 import 'package:skillmatch/features/saved_jobs/presentation/state/saved_jobs_cubit.dart';
@@ -87,7 +89,7 @@ class _SavedJobsScreenState extends State<SavedJobsScreen> {
                         child: AppliedJobCard(
                           application: application,
                           onView: () => _showComingSoon(
-                            'Application details are coming soon.',
+                            context.l10n.savedApplicationDetailsSoon,
                           ),
                         ),
                       ),
@@ -103,7 +105,9 @@ class _SavedJobsScreenState extends State<SavedJobsScreen> {
                         onRemove: () =>
                             context.read<SavedJobsCubit>().toggleSaved(job.id),
                         onApply: () => _showComingSoon(
-                          'Application for ${job.title} is coming soon.',
+                          context.l10n.applicationComingSoon(
+                            job.localizedTitle(context.l10n),
+                          ),
                         ),
                       ),
                     ),
@@ -123,7 +127,7 @@ class _SavedJobsScreenState extends State<SavedJobsScreen> {
         .where(
           (job) =>
               query.isEmpty ||
-              job.title.toLowerCase().contains(query) ||
+              job.localizedTitle(context.l10n).toLowerCase().contains(query) ||
               job.company.toLowerCase().contains(query),
         )
         .toList();
@@ -145,7 +149,7 @@ class _SavedJobsScreenState extends State<SavedJobsScreen> {
 
   List<JobApplication> _visibleApplications() {
     final query = _query.trim().toLowerCase();
-    return AppliedJobSampleData.applications
+    return AppliedJobSampleData.applications(context.l10n)
         .where(
           (application) =>
               _applicationStatus == null ||
@@ -154,7 +158,10 @@ class _SavedJobsScreenState extends State<SavedJobsScreen> {
         .where(
           (application) =>
               query.isEmpty ||
-              application.job.title.toLowerCase().contains(query) ||
+              application.job
+                  .localizedTitle(context.l10n)
+                  .toLowerCase()
+                  .contains(query) ||
               application.job.company.toLowerCase().contains(query),
         )
         .toList();

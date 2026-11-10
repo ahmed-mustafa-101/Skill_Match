@@ -5,6 +5,7 @@ import 'package:skillmatch/core/design_system/spacing/app_radius.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/layout/app_card.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class RoadmapInsightCard extends StatelessWidget {
   const RoadmapInsightCard({
@@ -47,14 +48,14 @@ class RoadmapInsightCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: AppText(
-                        'Roadmap Insight',
+                        context.l10n.roadmapInsightTitle,
                         style: AppTextStyles.labelLarge,
                         color: AppColors.primary,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                     AppText(
-                      'AI ADVISORY',
+                      context.l10n.roadmapAiAdvisory,
                       style: AppTextStyles.labelSmall,
                       color: AppColors.textSecondary,
                     ),
@@ -62,7 +63,7 @@ class RoadmapInsightCard extends StatelessWidget {
                 ),
                 SizedBox(height: 4.h),
                 AppText(
-                  'Testing and CI/CD are currently your highest-impact skill gaps for $targetRole roles.',
+                  context.l10n.roadmapInsightDescription(targetRole),
                   style: AppTextStyles.bodySmall.copyWith(
                     color: AppColors.textPrimary,
                     height: 1.5,
@@ -81,7 +82,7 @@ class RoadmapInsightCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       AppText(
-                        'Ask Chat Bot',
+                        context.l10n.roadmapAskChatBot,
                         style: AppTextStyles.labelMedium,
                         color: AppColors.secondary,
                         fontWeight: FontWeight.w600,

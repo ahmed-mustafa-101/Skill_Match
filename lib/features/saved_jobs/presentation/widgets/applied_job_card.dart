@@ -6,7 +6,9 @@ import 'package:skillmatch/core/design_system/spacing/app_spacing.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/layout/app_card.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 import 'package:skillmatch/features/home/domain/entities/job_listing.dart';
+import 'package:skillmatch/features/home/presentation/utils/home_job_localization.dart';
 import 'package:skillmatch/features/saved_jobs/domain/entities/job_application.dart';
 
 class AppliedJobCard extends StatelessWidget {
@@ -46,7 +48,7 @@ class AppliedJobCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppText(
-                      job.title,
+                      job.localizedTitle(context.l10n),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppTextStyles.titleSmall.copyWith(
@@ -79,7 +81,7 @@ class AppliedJobCard extends StatelessWidget {
                     Icon(Icons.circle, size: 6.r, color: statusColor),
                     SizedBox(width: AppSpacing.space4.w),
                     AppText(
-                      _statusLabel(application.status),
+                      _statusLabel(context, application.status),
                       style: AppTextStyles.labelSmall.copyWith(
                         color: statusColor,
                         fontSize: 10.sp,
@@ -97,9 +99,12 @@ class AppliedJobCard extends StatelessWidget {
             runSpacing: 6.h,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              if (job.location.isNotEmpty) _JobTag(job.location),
-              if (job.experience.isNotEmpty) _JobTag(job.experience),
-              if (job.employmentType.isNotEmpty) _JobTag(job.employmentType),
+              if (job.location.isNotEmpty)
+                _JobTag(job.localizedLocation(context.l10n)),
+              if (job.experience.isNotEmpty)
+                _JobTag(job.localizedExperience(context.l10n)),
+              if (job.employmentType.isNotEmpty)
+                _JobTag(job.localizedEmploymentType(context.l10n)),
               AppText(
                 application.appliedAt,
                 style: AppTextStyles.labelSmall.copyWith(
@@ -117,7 +122,7 @@ class AppliedJobCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(20.r),
             ),
             child: AppText(
-              '• ${job.matchLabel}',
+              '• ${job.localizedMatchLabel(context.l10n)}',
               style: AppTextStyles.labelSmall.copyWith(
                 color: matchColor,
                 fontSize: 10.sp,
@@ -189,7 +194,7 @@ class AppliedJobCard extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('View application'),
+                    Text(context.l10n.savedViewApplication),
                     SizedBox(width: AppSpacing.space2.w),
                     Icon(Icons.chevron_right_rounded, size: 18.r),
                   ],
@@ -272,10 +277,11 @@ Color _statusBackground(JobApplicationStatus status) => switch (status) {
   JobApplicationStatus.offer => AppColors.successContainer,
 };
 
-String _statusLabel(JobApplicationStatus status) => switch (status) {
-  JobApplicationStatus.applied => 'Applied',
-  JobApplicationStatus.inReview => 'In Review',
-  JobApplicationStatus.interview => 'Interview',
-  JobApplicationStatus.rejected => 'Rejected',
-  JobApplicationStatus.offer => 'Offer',
-};
+String _statusLabel(BuildContext context, JobApplicationStatus status) =>
+    switch (status) {
+      JobApplicationStatus.applied => context.l10n.savedStatusApplied,
+      JobApplicationStatus.inReview => context.l10n.savedStatusInReview,
+      JobApplicationStatus.interview => context.l10n.savedStatusInterview,
+      JobApplicationStatus.rejected => context.l10n.savedStatusRejected,
+      JobApplicationStatus.offer => context.l10n.savedStatusOffer,
+    };

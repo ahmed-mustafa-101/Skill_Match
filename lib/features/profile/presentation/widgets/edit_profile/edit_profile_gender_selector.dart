@@ -4,6 +4,7 @@ import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/spacing/app_radius.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class EditProfileGenderSelector extends StatelessWidget {
   const EditProfileGenderSelector({
@@ -17,13 +18,17 @@ class EditProfileGenderSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const genders = ['Male', 'Female', 'Prefer not to say'];
+    final genders = [
+      (value: 'male', label: context.l10n.editProfileMale),
+      (value: 'female', label: context.l10n.editProfileFemale),
+      (value: 'unspecified', label: context.l10n.editProfilePreferNotToSay),
+    ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const AppText(
-          'Gender',
+        AppText(
+          context.l10n.editProfileGender,
           style: AppTextStyles.labelMedium,
           color: AppColors.textSecondary,
           fontWeight: FontWeight.w600,
@@ -35,9 +40,9 @@ class EditProfileGenderSelector extends StatelessWidget {
               if (index > 0) SizedBox(width: 8.w),
               Expanded(
                 child: _GenderOption(
-                  label: genders[index],
-                  selected: value == genders[index],
-                  onTap: () => onChanged(genders[index]),
+                  label: genders[index].label,
+                  selected: value == genders[index].value,
+                  onTap: () => onChanged(genders[index].value),
                 ),
               ),
             ],

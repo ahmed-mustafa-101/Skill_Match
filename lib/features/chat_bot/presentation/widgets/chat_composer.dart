@@ -6,6 +6,7 @@ import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/buttons/app_icon_button.dart';
 import 'package:skillmatch/core/design_system/widgets/inputs/app_text_field.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class ChatComposer extends StatelessWidget {
   const ChatComposer({
@@ -40,7 +41,7 @@ class ChatComposer extends StatelessWidget {
                 Expanded(
                   child: AppTextField(
                     controller: controller,
-                    hintText: 'Ask anything about your career...',
+                    hintText: context.l10n.chatBotInputHint,
                     onChanged: onChanged,
                     onSubmitted: (_) => onSend(),
                     textInputAction: TextInputAction.send,
@@ -60,13 +61,13 @@ class ChatComposer extends StatelessWidget {
                   onPressed: enabled ? onSend : null,
                   size: 48.r,
                   iconSize: 22.r,
-                  tooltip: 'Send message',
+                  tooltip: context.l10n.chatBotSendMessage,
                 ),
               ],
             ),
             SizedBox(height: 7.h),
             AppText(
-              'AI can make mistakes. Double-check important information.',
+              context.l10n.chatBotDisclaimer,
               style: AppTextStyles.labelSmall,
               color: AppColors.textSecondary,
               textAlign: TextAlign.center,

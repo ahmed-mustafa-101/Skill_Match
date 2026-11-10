@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/features/chat_bot/domain/entities/chat_message.dart';
 import 'package:skillmatch/features/chat_bot/presentation/widgets/chat_bot_app_bar.dart';
 import 'package:skillmatch/features/chat_bot/presentation/widgets/chat_bot_welcome_panel.dart';
 import 'package:skillmatch/features/chat_bot/presentation/widgets/chat_composer.dart';
 import 'package:skillmatch/features/chat_bot/presentation/widgets/chat_conversation_list.dart';
+import 'package:skillmatch/generated/l10n.dart';
 
 class ChatBotScreen extends StatefulWidget {
   const ChatBotScreen({super.key});
@@ -83,7 +85,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
       setState(() {
         _messages.add(
           ChatMessage(
-            text: _buildSampleReply(message),
+            text: _buildSampleReply(message, context.l10n),
             sender: ChatMessageSender.assistant,
             sentAt: DateTime.now(),
           ),
@@ -101,18 +103,23 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
     });
   }
 
-  String _buildSampleReply(String message) {
+  String _buildSampleReply(String message, S l10n) {
     final query = message.toLowerCase();
-    if (query.contains('cv') || query.contains('resume')) {
-      return 'A strong CV starts with a clear summary, measurable achievements, and skills tailored to the role. Share the job title you are targeting and I can suggest sections to improve.';
+    if (query.contains('cv') ||
+        query.contains('resume') ||
+        query.contains('السيرة الذاتية')) {
+      return l10n.chatBotCvReply;
     }
-    if (query.contains('interview')) {
-      return 'Let’s prepare together. Start by reviewing the role requirements, then practice explaining one project: the challenge, your approach, and the result.';
+    if (query.contains('interview') || query.contains('مقابلة')) {
+      return l10n.chatBotInterviewReply;
     }
-    if (query.contains('job') || query.contains('career')) {
-      return 'A good next step is to match your strongest skills with the role requirements, then focus on one or two gaps. Which role or skill would you like to explore first?';
+    if (query.contains('job') ||
+        query.contains('career') ||
+        query.contains('وظيفة') ||
+        query.contains('مسار')) {
+      return l10n.chatBotCareerReply;
     }
-    return 'Thanks for sharing. I can help you explore career options, prepare for interviews, improve your CV, or plan the skills to learn next. What would you like to focus on?';
+    return l10n.chatBotDefaultReply;
   }
 
   void _startNewChat() {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class SavedJobsTabSwitcher extends StatelessWidget {
   const SavedJobsTabSwitcher({
@@ -24,12 +25,12 @@ class SavedJobsTabSwitcher extends StatelessWidget {
       child: Row(
         children: [
           _TabButton(
-            label: 'Saved',
+            label: context.l10n.savedTab,
             isSelected: selectedIndex == 0,
             onPressed: () => onChanged(0),
           ),
           _TabButton(
-            label: 'Applied',
+            label: context.l10n.appliedTab,
             isSelected: selectedIndex == 1,
             onPressed: () => onChanged(1),
           ),

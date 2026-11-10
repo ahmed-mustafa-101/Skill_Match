@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 import 'package:skillmatch/features/notifications/domain/entities/notification_item.dart';
 
 class NotificationFilterChips extends StatelessWidget {
@@ -27,7 +28,7 @@ class NotificationFilterChips extends StatelessWidget {
           final selected = category == selectedCategory;
 
           return ChoiceChip(
-            label: Text(category.label),
+            label: Text(_categoryLabel(context, category)),
             selected: selected,
             showCheckmark: false,
             onSelected: (_) => onChanged(category),
@@ -43,5 +44,16 @@ class NotificationFilterChips extends StatelessWidget {
         },
       ),
     );
+  }
+
+  String _categoryLabel(BuildContext context, NotificationCategory category) {
+    return switch (category) {
+      NotificationCategory.all => context.l10n.notificationCategoryAll,
+      NotificationCategory.jobs => context.l10n.notificationCategoryJobs,
+      NotificationCategory.applications =>
+        context.l10n.notificationCategoryApplications,
+      NotificationCategory.roadmap => context.l10n.notificationCategoryRoadmap,
+      NotificationCategory.cv => context.l10n.notificationCategoryCv,
+    };
   }
 }

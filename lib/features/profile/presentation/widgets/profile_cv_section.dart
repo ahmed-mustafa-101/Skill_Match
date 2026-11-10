@@ -3,6 +3,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/widgets/layout/app_card.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 import 'package:skillmatch/features/profile/presentation/widgets/profile_section_card.dart';
 
 class ProfileCvSection extends StatelessWidget {
@@ -11,8 +12,8 @@ class ProfileCvSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProfileSectionCard(
-      title: 'CV',
-      status: 'Good',
+      title: context.l10n.profileCvLabel,
+      status: context.l10n.profileCvGood,
       trailing: IconButton(
         onPressed: () {},
         icon: const Icon(Icons.edit_outlined),
@@ -51,7 +52,7 @@ class ProfileCvSection extends StatelessWidget {
                     ),
                     SizedBox(height: 4.h),
                     AppText(
-                      'Analyzed • Updated 5 days ago',
+                      context.l10n.profileCvAnalyzedUpdated,
                       style: Theme.of(context).textTheme.bodySmall,
                       color: AppColors.textSecondary,
                     ),
@@ -67,14 +68,14 @@ class ProfileCvSection extends StatelessWidget {
             Expanded(
               child: OutlinedButton(
                 onPressed: () {},
-                child: const Text('View CV'),
+                child: Text(context.l10n.profileViewCv),
               ),
             ),
             SizedBox(width: 10.w),
             Expanded(
               child: OutlinedButton(
                 onPressed: () {},
-                child: const Text('Replace CV'),
+                child: Text(context.l10n.profileReplaceCv),
               ),
             ),
           ],

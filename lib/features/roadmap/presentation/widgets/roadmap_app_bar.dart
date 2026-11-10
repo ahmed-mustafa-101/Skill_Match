@@ -4,6 +4,7 @@ import 'package:skillmatch/core/design_system/app_bar/app_app_bar.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class RoadmapAppBar extends StatelessWidget implements PreferredSizeWidget {
   const RoadmapAppBar({super.key, required this.onResetTasks});
@@ -22,7 +23,7 @@ class RoadmapAppBar extends StatelessWidget implements PreferredSizeWidget {
           Icon(Icons.alt_route_rounded, size: 23.r, color: AppColors.primary),
           SizedBox(width: 8.w),
           AppText(
-            'Roadmap',
+            context.l10n.navRoadmap,
             style: AppTextStyles.titleLarge,
             color: AppColors.primary,
             fontWeight: FontWeight.w700,
@@ -32,7 +33,7 @@ class RoadmapAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       actions: [
         IconButton(
-          tooltip: 'Reset weekly tasks',
+          tooltip: context.l10n.roadmapResetTasks,
           onPressed: onResetTasks,
           icon: Icon(
             Icons.refresh_rounded,

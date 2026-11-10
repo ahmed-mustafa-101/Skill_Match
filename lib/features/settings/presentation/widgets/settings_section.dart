@@ -21,10 +21,8 @@ class SettingsSection extends StatelessWidget {
           padding: EdgeInsets.only(left: 4.w, bottom: 8.h),
           child: Text(
             title.toUpperCase(),
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-              color: AppColors.textSecondary,
-              letterSpacing: 0.35,
-            ),
+            style: Theme.of(context).textTheme.labelSmall
+                ?.copyWith(color: AppColors.textSecondary, letterSpacing: 0.35),
           ),
         ),
         Container(

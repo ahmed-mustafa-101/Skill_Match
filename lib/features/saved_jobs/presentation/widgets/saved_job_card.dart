@@ -6,7 +6,9 @@ import 'package:skillmatch/core/design_system/spacing/app_spacing.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/layout/app_card.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 import 'package:skillmatch/features/home/domain/entities/job_listing.dart';
+import 'package:skillmatch/features/home/presentation/utils/home_job_localization.dart';
 
 class SavedJobCard extends StatelessWidget {
   const SavedJobCard({
@@ -44,7 +46,7 @@ class SavedJobCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppText(
-                      job.title,
+                      job.localizedTitle(context.l10n),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppTextStyles.titleSmall.copyWith(
@@ -65,7 +67,7 @@ class SavedJobCard extends StatelessWidget {
               ),
               IconButton(
                 onPressed: onRemove,
-                tooltip: 'Remove from saved jobs',
+                tooltip: context.l10n.savedRemoveFromSaved,
                 visualDensity: VisualDensity.compact,
                 constraints: BoxConstraints.tightFor(width: 32.w, height: 36.h),
                 padding: EdgeInsets.zero,
@@ -83,15 +85,18 @@ class SavedJobCard extends StatelessWidget {
             runSpacing: 6.h,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              _JobTag(job.location),
-              if (job.experience.isNotEmpty) _JobTag(job.experience),
-              if (job.employmentType.isNotEmpty) _JobTag(job.employmentType),
-              if (job.workArrangement.isNotEmpty) _JobTag(job.workArrangement),
+              _JobTag(job.localizedLocation(context.l10n)),
+              if (job.experience.isNotEmpty)
+                _JobTag(job.localizedExperience(context.l10n)),
+              if (job.employmentType.isNotEmpty)
+                _JobTag(job.localizedEmploymentType(context.l10n)),
+              if (job.workArrangement.isNotEmpty)
+                _JobTag(job.localizedWorkArrangement(context.l10n)),
             ],
           ),
           SizedBox(height: 6.h),
           AppText(
-            job.posted,
+            job.localizedPosted(context.l10n),
             style: AppTextStyles.labelSmall.copyWith(
               color: AppColors.textSecondary,
               fontSize: 10.sp,
@@ -107,7 +112,7 @@ class SavedJobCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20.r),
                 ),
                 child: AppText(
-                  '• ${job.matchLabel}',
+                  '• ${job.localizedMatchLabel(context.l10n)}',
                   style: AppTextStyles.labelSmall.copyWith(
                     color: matchColor,
                     fontSize: 10.sp,
@@ -119,7 +124,7 @@ class SavedJobCard extends StatelessWidget {
           ),
           SizedBox(height: AppSpacing.space4.h),
           AppText(
-            job.matchDescription,
+            job.localizedMatchDescription(context.l10n),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: AppTextStyles.labelSmall.copyWith(
@@ -134,7 +139,7 @@ class SavedJobCard extends StatelessWidget {
             children: [
               Expanded(
                 child: AppText(
-                  'Saved to your list',
+                  context.l10n.savedToYourList,
                   style: AppTextStyles.labelSmall.copyWith(
                     color: AppColors.textSecondary,
                     fontSize: 10.sp,
@@ -156,7 +161,7 @@ class SavedJobCard extends StatelessWidget {
                       fontSize: 11.sp,
                     ),
                   ),
-                  child: const Text('Apply Now'),
+                  child: Text(context.l10n.applyNow),
                 ),
               ),
             ],

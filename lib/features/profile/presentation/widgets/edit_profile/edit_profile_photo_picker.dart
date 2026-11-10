@@ -4,6 +4,7 @@ import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/media/app_avatar.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class EditProfilePhotoPicker extends StatelessWidget {
   const EditProfilePhotoPicker({super.key, required this.onTap});
@@ -58,8 +59,8 @@ class EditProfilePhotoPicker extends StatelessWidget {
             minimumSize: Size(0, 32.h),
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
-          child: const AppText(
-            'Change photo',
+          child: AppText(
+            context.l10n.editProfileChangePhoto,
             style: AppTextStyles.labelMedium,
             color: AppColors.secondary,
             fontWeight: FontWeight.w600,

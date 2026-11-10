@@ -4,6 +4,7 @@ import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/spacing/app_spacing.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class SavedJobsEmptyState extends StatelessWidget {
   const SavedJobsEmptyState({super.key, required this.isAppliedTab});
@@ -28,7 +29,9 @@ class SavedJobsEmptyState extends StatelessWidget {
           ),
           SizedBox(height: AppSpacing.space12.h),
           AppText(
-            isAppliedTab ? 'No applications yet' : 'No saved jobs yet',
+            isAppliedTab
+                ? context.l10n.savedApplicationsEmptyTitle
+                : context.l10n.noSavedJobs,
             style: AppTextStyles.titleMedium.copyWith(
               color: AppColors.textSecondary,
             ),
@@ -36,8 +39,8 @@ class SavedJobsEmptyState extends StatelessWidget {
           SizedBox(height: AppSpacing.space4.h),
           AppText(
             isAppliedTab
-                ? 'Jobs you apply to will appear here.'
-                : 'Tap the bookmark on a job to save it here.',
+                ? context.l10n.savedApplicationsEmptyDescription
+                : context.l10n.saveJobHint,
             textAlign: TextAlign.center,
             style: AppTextStyles.bodySmall.copyWith(
               color: AppColors.textSecondary,

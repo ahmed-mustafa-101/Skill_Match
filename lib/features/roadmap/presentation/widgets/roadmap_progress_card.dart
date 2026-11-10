@@ -5,6 +5,7 @@ import 'package:skillmatch/core/design_system/spacing/app_radius.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/layout/app_card.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class RoadmapProgressCard extends StatelessWidget {
   const RoadmapProgressCard({
@@ -31,7 +32,7 @@ class RoadmapProgressCard extends StatelessWidget {
             children: [
               Expanded(
                 child: AppText(
-                  'Your progress',
+                  context.l10n.roadmapYourProgress,
                   style: AppTextStyles.labelLarge,
                   fontWeight: FontWeight.w600,
                 ),
@@ -64,7 +65,10 @@ class RoadmapProgressCard extends StatelessWidget {
               ),
               SizedBox(width: 5.w),
               AppText(
-                '$completedMilestones of $totalMilestones milestones completed',
+                context.l10n.roadmapProgressSummary(
+                  completedMilestones.toString(),
+                  totalMilestones.toString(),
+                ),
                 style: AppTextStyles.bodySmall,
                 color: AppColors.textSecondary,
               ),

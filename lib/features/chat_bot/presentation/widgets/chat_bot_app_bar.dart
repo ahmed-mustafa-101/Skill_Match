@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 import 'package:skillmatch/core/design_system/app_bar/app_app_bar.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
@@ -35,7 +36,7 @@ class ChatBotAppBar extends StatelessWidget implements PreferredSizeWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 AppText(
-                  'SkillMatch AI',
+                  context.l10n.chatBotAssistantName,
                   style: AppTextStyles.titleSmall,
                   color: AppColors.primary,
                   fontWeight: FontWeight.w700,
@@ -53,7 +54,7 @@ class ChatBotAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                     SizedBox(width: 5.w),
                     AppText(
-                      'Your career copilot',
+                      context.l10n.chatBotAssistantSubtitle,
                       style: AppTextStyles.labelSmall,
                       color: AppColors.textSecondary,
                     ),
@@ -67,7 +68,7 @@ class ChatBotAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       actions: [
         IconButton(
-          tooltip: 'New conversation',
+          tooltip: context.l10n.chatBotNewConversation,
           onPressed: onNewChat,
           icon: Icon(Icons.edit_square, size: 21.r, color: AppColors.primary),
         ),

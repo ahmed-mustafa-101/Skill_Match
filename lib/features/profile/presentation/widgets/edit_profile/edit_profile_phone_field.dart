@@ -5,6 +5,7 @@ import 'package:skillmatch/core/design_system/spacing/app_radius.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/inputs/app_text_field.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 
 class EditProfilePhoneField extends StatelessWidget {
   const EditProfilePhoneField({
@@ -25,8 +26,8 @@ class EditProfilePhoneField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const AppText(
-          'Phone Number',
+        AppText(
+          context.l10n.editProfilePhoneNumber,
           style: AppTextStyles.labelMedium,
           color: AppColors.textSecondary,
           fontWeight: FontWeight.w600,

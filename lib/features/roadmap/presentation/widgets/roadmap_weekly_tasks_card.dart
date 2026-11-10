@@ -6,7 +6,9 @@ import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/buttons/app_button.dart';
 import 'package:skillmatch/core/design_system/widgets/layout/app_card.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 import 'package:skillmatch/features/roadmap/domain/entities/roadmap_milestone.dart';
+import 'package:skillmatch/features/roadmap/presentation/utils/roadmap_task_localization.dart';
 
 class RoadmapWeeklyTasksCard extends StatelessWidget {
   const RoadmapWeeklyTasksCard({
@@ -35,7 +37,7 @@ class RoadmapWeeklyTasksCard extends StatelessWidget {
             children: [
               Expanded(
                 child: AppText(
-                  'Focus for this week',
+                  context.l10n.roadmapFocusThisWeek,
                   style: AppTextStyles.labelLarge,
                   fontWeight: FontWeight.w700,
                 ),
@@ -48,7 +50,7 @@ class RoadmapWeeklyTasksCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(AppRadius.radius4),
                 ),
                 child: AppText(
-                  'PRIORITY',
+                  context.l10n.roadmapPriority,
                   style: AppTextStyles.labelSmall.copyWith(fontSize: 9),
                   color: AppColors.warning,
                   fontWeight: FontWeight.w600,
@@ -59,7 +61,8 @@ class RoadmapWeeklyTasksCard extends StatelessWidget {
           SizedBox(height: 6.h),
           for (var index = 0; index < tasks.length; index++)
             _TaskCheckbox(
-              task: tasks[index],
+              taskLabel: tasks[index].localizedTitle(context),
+              isComplete: tasks[index].isComplete,
               onChanged: () => onTaskChanged(index),
             ),
           SizedBox(height: 4.h),
@@ -72,7 +75,7 @@ class RoadmapWeeklyTasksCard extends StatelessWidget {
               ),
               SizedBox(width: 5.w),
               AppText(
-                'Estimated: $timeEstimate',
+                context.l10n.roadmapEstimatedTime(timeEstimate),
                 style: AppTextStyles.bodySmall,
                 color: AppColors.textSecondary,
               ),
@@ -95,21 +98,19 @@ class RoadmapWeeklyTasksCard extends StatelessWidget {
                   color: AppColors.textPrimary,
                   height: 1.6,
                 ),
-                children: const [
+                children: [
                   TextSpan(
-                    text: 'Why this matters: ',
+                    text: context.l10n.roadmapWhyThisMatters,
                     style: TextStyle(fontWeight: FontWeight.w700),
                   ),
-                  TextSpan(
-                    text: 'State management appears frequently in Flutter roles that match your profile.',
-                  ),
+                  TextSpan(text: context.l10n.roadmapWhyThisMattersDescription),
                 ],
               ),
             ),
           ),
           SizedBox(height: 8.h),
           AppButton(
-            text: 'View Tasks',
+            text: context.l10n.roadmapViewTasks,
             trailing: Icon(
               Icons.arrow_forward_rounded,
               size: 16.r,
@@ -129,9 +130,14 @@ class RoadmapWeeklyTasksCard extends StatelessWidget {
 }
 
 class _TaskCheckbox extends StatelessWidget {
-  const _TaskCheckbox({required this.task, required this.onChanged});
+  const _TaskCheckbox({
+    required this.taskLabel,
+    required this.isComplete,
+    required this.onChanged,
+  });
 
-  final RoadmapTask task;
+  final String taskLabel;
+  final bool isComplete;
   final VoidCallback onChanged;
 
   @override
@@ -146,7 +152,7 @@ class _TaskCheckbox extends StatelessWidget {
               width: 24.r,
               height: 28.r,
               child: Checkbox(
-                value: task.isComplete,
+                value: isComplete,
                 onChanged: (_) => onChanged(),
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 visualDensity: VisualDensity.compact,
@@ -159,7 +165,7 @@ class _TaskCheckbox extends StatelessWidget {
             SizedBox(width: 6.w),
             Expanded(
               child: AppText(
-                task.title,
+                taskLabel,
                 style: AppTextStyles.bodySmall,
                 color: AppColors.textPrimary,
               ),

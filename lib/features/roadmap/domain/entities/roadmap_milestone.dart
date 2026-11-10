@@ -1,8 +1,10 @@
 enum RoadmapMilestoneStatus { completed, inProgress, next, upcoming, ready }
 
-class RoadmapTask {
-  const RoadmapTask({required this.title, this.isComplete = false});
+enum RoadmapTaskType { learnBloc, implementBloc, refactorProject }
 
-  final String title;
+class RoadmapTask {
+  const RoadmapTask({required this.type, this.isComplete = false});
+
+  final RoadmapTaskType type;
   final bool isComplete;
 }

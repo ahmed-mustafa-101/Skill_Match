@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 import 'package:skillmatch/features/profile/presentation/widgets/profile_chip.dart';
 import 'package:skillmatch/features/profile/presentation/widgets/profile_section_card.dart';
 
@@ -11,8 +12,8 @@ class ProfileSkillsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProfileSectionCard(
-      title: 'Skills',
-      status: 'Excellent',
+      title: context.l10n.profileSkills,
+      status: context.l10n.profileExcellent,
       trailing: IconButton(
         onPressed: () {},
         icon: const Icon(Icons.edit_outlined),
@@ -22,9 +23,9 @@ class ProfileSkillsSection extends StatelessWidget {
       children: [
         Row(
           children: [
-            const Expanded(
+            Expanded(
               child: AppText(
-                'From CV',
+                context.l10n.profileFromCv,
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                 color: AppColors.textSecondary,
               ),
@@ -32,7 +33,7 @@ class ProfileSkillsSection extends StatelessWidget {
             InkWell(
               onTap: () {},
               child: AppText(
-                '+ Add skill',
+                context.l10n.profileAddSkill,
                 style: Theme.of(context).textTheme.labelMedium,
                 color: AppColors.primary,
                 fontWeight: FontWeight.w600,

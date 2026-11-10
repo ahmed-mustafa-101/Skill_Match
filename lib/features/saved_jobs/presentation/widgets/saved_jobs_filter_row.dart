@@ -4,6 +4,7 @@ import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/spacing/app_spacing.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 import 'package:skillmatch/features/saved_jobs/domain/entities/job_application.dart';
 
 enum SavedJobsSort { recommended, bestMatch, title }
@@ -40,8 +41,8 @@ class SavedJobsFilterRow extends StatelessWidget {
           Expanded(
             child: AppText(
               isAppliedTab
-                  ? '$itemCount applications'
-                  : '$itemCount ${itemCount == 1 ? 'saved opportunity' : 'saved opportunities'}',
+                  ? context.l10n.applicationCount(itemCount.toString())
+                  : context.l10n.savedJobCount(itemCount.toString()),
               style: AppTextStyles.bodySmall.copyWith(
                 color: AppColors.textPrimary,
                 fontSize: 12.sp,
@@ -68,24 +69,27 @@ class _SortFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final label = switch (selectedSort) {
-      SavedJobsSort.recommended => 'Recommended',
-      SavedJobsSort.bestMatch => 'Best match',
-      SavedJobsSort.title => 'Title A–Z',
+      SavedJobsSort.recommended => context.l10n.savedSortRecommended,
+      SavedJobsSort.bestMatch => context.l10n.savedSortBestMatch,
+      SavedJobsSort.title => context.l10n.savedSortTitle,
     };
 
     return PopupMenuButton<SavedJobsSort>(
       onSelected: onSelected,
       padding: EdgeInsets.zero,
-      itemBuilder: (context) => const [
+      itemBuilder: (context) => [
         PopupMenuItem(
           value: SavedJobsSort.recommended,
-          child: Text('Recommended'),
+          child: Text(context.l10n.savedSortRecommended),
         ),
         PopupMenuItem(
           value: SavedJobsSort.bestMatch,
-          child: Text('Best match'),
+          child: Text(context.l10n.savedSortBestMatch),
         ),
-        PopupMenuItem(value: SavedJobsSort.title, child: Text('Title A–Z')),
+        PopupMenuItem(
+          value: SavedJobsSort.title,
+          child: Text(context.l10n.savedSortTitle),
+        ),
       ],
       child: _FilterLabel(icon: Icons.tune_rounded, label: label),
     );
@@ -106,19 +110,19 @@ class _StatusFilter extends StatelessWidget {
       ),
       padding: EdgeInsets.zero,
       itemBuilder: (context) => [
-        const PopupMenuItem(value: 'all', child: Text('All statuses')),
+        PopupMenuItem(value: 'all', child: Text(context.l10n.savedStatusAll)),
         ...JobApplicationStatus.values.map(
           (status) => PopupMenuItem(
             value: status.name,
-            child: Text(_statusLabel(status)),
+            child: Text(_statusLabel(context, status)),
           ),
         ),
       ],
       child: _FilterLabel(
         icon: Icons.filter_list_rounded,
         label: selectedStatus == null
-            ? 'All statuses'
-            : _statusLabel(selectedStatus!),
+            ? context.l10n.savedStatusAll
+            : _statusLabel(context, selectedStatus!),
       ),
     );
   }
@@ -149,10 +153,11 @@ class _FilterLabel extends StatelessWidget {
   }
 }
 
-String _statusLabel(JobApplicationStatus status) => switch (status) {
-  JobApplicationStatus.applied => 'Applied',
-  JobApplicationStatus.inReview => 'In Review',
-  JobApplicationStatus.interview => 'Interview',
-  JobApplicationStatus.rejected => 'Rejected',
-  JobApplicationStatus.offer => 'Offer',
-};
+String _statusLabel(BuildContext context, JobApplicationStatus status) =>
+    switch (status) {
+      JobApplicationStatus.applied => context.l10n.savedStatusApplied,
+      JobApplicationStatus.inReview => context.l10n.savedStatusInReview,
+      JobApplicationStatus.interview => context.l10n.savedStatusInterview,
+      JobApplicationStatus.rejected => context.l10n.savedStatusRejected,
+      JobApplicationStatus.offer => context.l10n.savedStatusOffer,
+    };

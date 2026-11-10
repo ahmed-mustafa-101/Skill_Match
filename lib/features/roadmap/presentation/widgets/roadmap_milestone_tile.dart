@@ -3,6 +3,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 import 'package:skillmatch/features/roadmap/domain/entities/roadmap_milestone.dart';
 import 'package:skillmatch/features/roadmap/presentation/widgets/roadmap_milestone_decoration.dart';
 import 'package:skillmatch/features/roadmap/presentation/widgets/roadmap_weekly_tasks_card.dart';
@@ -59,7 +60,7 @@ class RoadmapMilestoneTile extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(left: 2.w, bottom: isLast ? 0 : 20.h),
-              child: _buildContent(),
+              child: _buildContent(context),
             ),
           ),
         ],
@@ -67,7 +68,7 @@ class RoadmapMilestoneTile extends StatelessWidget {
     );
   }
 
-  Widget _buildContent() {
+  Widget _buildContent(BuildContext context) {
     if (status == RoadmapMilestoneStatus.ready) {
       return Padding(
         padding: EdgeInsets.only(top: 5.h),
@@ -95,7 +96,7 @@ class RoadmapMilestoneTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 4.h),
-        _buildTitleRow(),
+        _buildTitleRow(context),
         SizedBox(height: 4.h),
         AppText(
           description,
@@ -123,7 +124,7 @@ class RoadmapMilestoneTile extends StatelessWidget {
     );
   }
 
-  Widget _buildTitleRow() {
+  Widget _buildTitleRow(BuildContext context) {
     final color = switch (status) {
       RoadmapMilestoneStatus.completed => AppColors.success,
       RoadmapMilestoneStatus.inProgress ||
@@ -143,19 +144,25 @@ class RoadmapMilestoneTile extends StatelessWidget {
           ),
         ),
         if (isHighPriority) ...[
-          const RoadmapStatusBadge(label: 'Next', color: AppColors.accent),
+          RoadmapStatusBadge(
+            label: context.l10n.roadmapStatusNext,
+            color: AppColors.accent,
+          ),
           SizedBox(width: 6.w),
-          const RoadmapStatusBadge(
-            label: 'High priority gap',
+          RoadmapStatusBadge(
+            label: context.l10n.roadmapHighPriorityGap,
             color: AppColors.secondary,
           ),
         ] else
           RoadmapStatusBadge(
             label: switch (status) {
-              RoadmapMilestoneStatus.completed => 'Completed',
-              RoadmapMilestoneStatus.inProgress => 'In Progress',
-              RoadmapMilestoneStatus.next => 'Next',
-              RoadmapMilestoneStatus.upcoming => 'Upcoming',
+              RoadmapMilestoneStatus.completed =>
+                context.l10n.roadmapStatusCompleted,
+              RoadmapMilestoneStatus.inProgress =>
+                context.l10n.roadmapStatusInProgress,
+              RoadmapMilestoneStatus.next => context.l10n.roadmapStatusNext,
+              RoadmapMilestoneStatus.upcoming =>
+                context.l10n.roadmapStatusUpcoming,
               RoadmapMilestoneStatus.ready => '',
             },
             color: color,

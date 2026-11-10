@@ -4,7 +4,9 @@ import 'package:skillmatch/core/design_system/colors/app_colors.dart';
 import 'package:skillmatch/core/design_system/spacing/app_radius.dart';
 import 'package:skillmatch/core/design_system/typography/app_text_styles.dart';
 import 'package:skillmatch/core/design_system/widgets/text/app_text.dart';
+import 'package:skillmatch/core/extensions/build_context_localization.dart';
 import 'package:skillmatch/features/roadmap/domain/entities/roadmap_milestone.dart';
+import 'package:skillmatch/features/roadmap/presentation/utils/roadmap_task_localization.dart';
 
 class RoadmapTasksSheet extends StatefulWidget {
   const RoadmapTasksSheet({
@@ -53,7 +55,7 @@ class _RoadmapTasksSheetState extends State<RoadmapTasksSheet> {
       _tasks = [
         for (var i = 0; i < _tasks.length; i++)
           RoadmapTask(
-            title: _tasks[i].title,
+            type: _tasks[i].type,
             isComplete: i == index
                 ? !_tasks[i].isComplete
                 : _tasks[i].isComplete,
@@ -84,7 +86,7 @@ class _RoadmapTasksSheetState extends State<RoadmapTasksSheet> {
             ),
             SizedBox(height: 18.h),
             AppText(
-              'State Management tasks',
+              context.l10n.roadmapTasksTitle,
               style: AppTextStyles.titleMedium,
               color: AppColors.primary,
               fontWeight: FontWeight.w700,
@@ -95,7 +97,7 @@ class _RoadmapTasksSheetState extends State<RoadmapTasksSheet> {
                 contentPadding: EdgeInsets.zero,
                 controlAffinity: ListTileControlAffinity.leading,
                 value: _tasks[index].isComplete,
-                title: Text(_tasks[index].title),
+                title: Text(_tasks[index].localizedTitle(context)),
                 onChanged: (_) => _toggleTask(index),
               ),
           ],

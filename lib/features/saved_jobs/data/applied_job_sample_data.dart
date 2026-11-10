@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:skillmatch/features/home/domain/entities/job_listing.dart';
 import 'package:skillmatch/features/saved_jobs/domain/entities/job_application.dart';
+import 'package:skillmatch/generated/l10n.dart';
 
 abstract final class AppliedJobSampleData {
-  static const List<JobApplication> applications = [
+  static List<JobApplication> applications(S l10n) => [
     JobApplication(
       job: JobListing(
         id: 'junior-flutter-developer',
@@ -20,9 +21,9 @@ abstract final class AppliedJobSampleData {
         matchStrength: 95,
         brandColor: Color(0xFF1F365C),
       ),
-      appliedAt: 'Applied 2 days ago',
+      appliedAt: l10n.applicationAppliedTwoDaysAgo,
       status: JobApplicationStatus.applied,
-      progressLabel: 'Application submitted',
+      progressLabel: l10n.applicationSubmitted,
     ),
     JobApplication(
       job: JobListing(
@@ -40,9 +41,9 @@ abstract final class AppliedJobSampleData {
         matchStrength: 90,
         brandColor: Color(0xFFD06B4F),
       ),
-      appliedAt: 'Applied 5 days ago',
+      appliedAt: l10n.applicationAppliedFiveDaysAgo,
       status: JobApplicationStatus.inReview,
-      progressLabel: 'Profile under evaluation',
+      progressLabel: l10n.applicationUnderReview,
     ),
     JobApplication(
       job: JobListing(
@@ -60,10 +61,10 @@ abstract final class AppliedJobSampleData {
         matchStrength: 82,
         brandColor: Color(0xFFD4A72C),
       ),
-      appliedAt: 'Applied 1 week ago',
+      appliedAt: l10n.applicationAppliedOneWeekAgo,
       status: JobApplicationStatus.interview,
-      progressLabel: 'Round 1 Technical',
-      alertMessage: 'Interview scheduled — check your email',
+      progressLabel: l10n.applicationTechnicalRoundOne,
+      alertMessage: l10n.applicationInterviewScheduled,
     ),
     JobApplication(
       job: JobListing(
@@ -81,9 +82,9 @@ abstract final class AppliedJobSampleData {
         matchStrength: 81,
         brandColor: Color(0xFF4F7A5A),
       ),
-      appliedAt: 'Applied 2 weeks ago',
+      appliedAt: l10n.applicationAppliedTwoWeeksAgo,
       status: JobApplicationStatus.rejected,
-      progressLabel: 'Application closed',
+      progressLabel: l10n.applicationClosed,
     ),
     JobApplication(
       job: JobListing(
@@ -101,9 +102,9 @@ abstract final class AppliedJobSampleData {
         matchStrength: 76,
         brandColor: Color(0xFFD4A72C),
       ),
-      appliedAt: 'Applied 3 weeks ago',
+      appliedAt: l10n.applicationAppliedThreeWeeksAgo,
       status: JobApplicationStatus.offer,
-      progressLabel: 'Offer received',
+      progressLabel: l10n.applicationOfferReceived,
     ),
   ];
 }
